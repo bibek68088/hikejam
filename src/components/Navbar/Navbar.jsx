@@ -1,14 +1,24 @@
-import React, { useState } from 'react'
-import './Navbar.css'
-import logo from "../assets/logo.jpg"
+import React, { useState, useEffect } from 'react';
+import { NavLink, useLocation } from 'react-router-dom';
+import './Navbar.css';
+import logo from "../assets/logo.jpg";
 
 const Navbar = () => {
-  const [menu, setMenu] = useState("Home");
   const [isMobile, setIsMobile] = useState(false);
+  const location = useLocation();
 
   const toggleMenu = () => {
     setIsMobile(!isMobile);
   };
+
+  const closeMobileMenu = () => {
+    setIsMobile(false);
+  };
+
+  // Close mobile menu when route changes
+  useEffect(() => {
+    closeMobileMenu();
+  }, [location]);
 
   return (
     <div className='navbar'>
@@ -17,23 +27,56 @@ const Navbar = () => {
         <p>HikeJam</p>
       </div>
 
- 
       <div className="hamburger" onClick={toggleMenu}>
-        <div className="bar"></div>
-        <div className="bar"></div>
-        <div className="bar"></div>
+        <div className={`bar ${isMobile ? 'animate' : ''}`}></div>
+        <div className={`bar ${isMobile ? 'animate' : ''}`}></div>
+        <div className={`bar ${isMobile ? 'animate' : ''}`}></div>
       </div>
 
       <ul className={`nav-menu ${isMobile ? 'show' : ''}`}>
-  <li className={menu === "home" ? "active" : ""} onClick={() => setMenu("home")}>Home</li>
-  <li className={menu === "about" ? "active" : ""} onClick={() => setMenu("about")}>About</li>
-  <li className={menu === "destination" ? "active" : ""} onClick={() => setMenu("destination")}>Destinations</li>
-  <li className={menu === "gallery" ? "active" : ""} onClick={() => setMenu("gallery")}>Gallery</li>
-  <li className={menu === "contact" ? "active" : ""} onClick={() => setMenu("contact")}>Contact</li>
-</ul>
-
+        <li>
+          <NavLink 
+            to="/" 
+            className={({ isActive }) => isActive ? "active" : ""}
+          >
+            Home
+          </NavLink>
+        </li>
+        <li>
+          <NavLink 
+            to="/about" 
+            className={({ isActive }) => isActive ? "active" : ""}
+          >
+            About
+          </NavLink>
+        </li>
+        <li>
+          <NavLink 
+            to="/destinations" 
+            className={({ isActive }) => isActive ? "active" : ""}
+          >
+            Destinations
+          </NavLink>
+        </li>
+        <li>
+          <NavLink 
+            to="/gallery" 
+            className={({ isActive }) => isActive ? "active" : ""}
+          >
+            Gallery
+          </NavLink>
+        </li>
+        <li>
+          <NavLink 
+            to="/contact" 
+            className={({ isActive }) => isActive ? "active" : ""}
+          >
+            Contact
+          </NavLink>
+        </li>
+      </ul>
     </div>
-  )
-}
+  );
+};
 
 export default Navbar;
