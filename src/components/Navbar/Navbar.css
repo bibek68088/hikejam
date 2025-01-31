@@ -38,35 +38,28 @@
     display: flex;
     align-items: center;
     list-style-type: none;
-    gap: 40px;
+    gap: 30px;
     font-weight: 500;
     margin: 0;
 }
 
 /* Navbar menu items */
 .nav-menu li {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 3px;
-    cursor: pointer;
     position: relative;
+    cursor: pointer;
     transition: color 0.3s ease;
 }
 
-/* Hover effect for menu items */
-.nav-menu li:hover hr {
-    width: 100px;
-    transition: width 0.3s ease-in-out;
-}
-
-/* HR line styling */
-.nav-menu hr {
-    width: 0;
+/* Active menu item (selected) */
+.nav-menu li.active::after {
+    content: "";
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    width: 100%;
     height: 2px;
-    border: none;
-    background-color: #fff; /* White color for the line */
+    background-color: #fff;
+    transform: translateX(-50%);
     transition: width 0.3s ease-in-out;
 }
 
@@ -131,7 +124,7 @@
 
 /* For mobile screens (smallest size) */
 @media (max-width: 480px) {
-    .nav-menu li:hover hr {
-        width: 60px; /* Adjust hover width for smaller screens */
+    .nav-menu li.active::after {
+        width: 60px; /* Adjust active width for smaller screens */
     }
 }

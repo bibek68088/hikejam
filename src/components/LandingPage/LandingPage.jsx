@@ -1,11 +1,10 @@
 import React from "react";
 import "./LandingPage.css";
-import heroVideo from "../assets/video.mp4"; // Background video
-import Particles from "react-tsparticles"; // Particle effect
-import { loadFull } from "tsparticles"; 
+import heroVideo from "../assets/video.mp4";
+import Particles from "react-tsparticles";
+import { loadFull } from "tsparticles";
 
 const LandingPage = () => {
-  // Configuring particles
   const particlesInit = async (main) => {
     await loadFull(main);
   };
@@ -13,20 +12,35 @@ const LandingPage = () => {
   return (
     <div className="landing-page">
       {/* Particle Effect */}
-      <Particles 
+      <Particles
         id="particles"
         init={particlesInit}
         options={{
           particles: {
             number: { value: 100 },
-            size: { value: 3 },
-            move: { speed: 1 },
-            opacity: { value: 0.5 },
+            size: { value: { min: 1, max: 5 } },
+            move: { speed: 2, direction: "none", random: true, straight: false },
+            opacity: { value: { min: 0.3, max: 0.7 } },
             color: { value: "#ffffff" },
+            links: {
+              enable: true,
+              distance: 150,
+              color: "#ffffff",
+              opacity: 0.4,
+              width: 1,
+            },
+          },
+          interactivity: {
+            events: {
+              onHover: {
+                enable: true,
+                mode: "repulse",
+              },
+            },
           },
         }}
       />
-      
+
       {/* Background Video */}
       <video autoPlay muted loop className="background-video">
         <source src={heroVideo} type="video/mp4" />
@@ -38,6 +52,9 @@ const LandingPage = () => {
         <p className="fade-in">Where the journey begins, and memories are made.</p>
         <button className="cta-button">Let's Explore</button>
       </div>
+
+      {/* Scroll Indicator */}
+      <div className="scroll-indicator"></div>
     </div>
   );
 };

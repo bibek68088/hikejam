@@ -25,12 +25,13 @@ const Navbar = () => {
       </div>
 
       <ul className={`nav-menu ${isMobile ? 'show' : ''}`}>
-        <li onClick={() => setMenu("home")}>Home{menu === "home" ? <hr /> : <></>}</li>
-        <li onClick={() => setMenu("about")}>About{menu === "about" ? <hr /> : <></>}</li>
-        <li onClick={() => setMenu("destination")}>Destinations{menu === "destination" ? <hr /> : <></>}</li>
-        <li onClick={() => setMenu("gallery")}>Gallery{menu === "gallery" ? <hr /> : <></>}</li>
-        <li onClick={() => setMenu("contact")}>Contact{menu === "contact" ? <hr /> : <></>}</li>
-      </ul>
+  <li className={menu === "home" ? "active" : ""} onClick={() => setMenu("home")}>Home</li>
+  <li className={menu === "about" ? "active" : ""} onClick={() => setMenu("about")}>About</li>
+  <li className={menu === "destination" ? "active" : ""} onClick={() => setMenu("destination")}>Destinations</li>
+  <li className={menu === "gallery" ? "active" : ""} onClick={() => setMenu("gallery")}>Gallery</li>
+  <li className={menu === "contact" ? "active" : ""} onClick={() => setMenu("contact")}>Contact</li>
+</ul>
+
     </div>
   )
 }
