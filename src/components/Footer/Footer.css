@@ -1,0 +1,86 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto:400,500,300,700");
+
+.footer {
+  background: #222;
+  color: #fff;
+  padding: 40px 20px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.footer-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.footer-logo img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+.footer-logo p {
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.footer-menu {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0;
+  display: flex;
+  gap: 20px;
+}
+
+.footer-menu li {
+  display: inline;
+}
+
+.footer-menu a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 16px;
+  transition: 0.3s;
+}
+
+.footer-menu a:hover {
+  color: #5383d3;
+}
+
+.footer-social {
+  margin-top: 15px;
+  display: flex;
+  gap: 15px;
+}
+
+.footer-social a {
+  font-size: 20px;
+  color: #fff;
+  transition: 0.3s;
+}
+
+.footer-social a:hover {
+  color: #5383d3;
+}
+
+.footer-text {
+  font-size: 14px;
+  color: #bbb;
+  margin-top: 20px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .footer-menu {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .footer-social {
+    gap: 10px;
+  }
+}
