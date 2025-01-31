@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
-import { Icon } from 'leaflet';
+import { divIcon } from 'leaflet';
 import './Destination.css';
 import { ErrorBoundary } from 'react-error-boundary';
-import React, { useMemo } from 'react';
+import  { useMemo } from 'react';
 
 
 // Hiking destinations data
@@ -162,7 +162,6 @@ const Destination = () => {
   const [currentLocation, setCurrentLocation] = useState(null);
   const [isLoadingLocation, setIsLoadingLocation] = useState(true);
 
-  // Memoized filtered destinations
   const filteredDestinations = useMemo(() => 
     hikingDestinations.filter(destination => {
       const query = searchQuery.toLowerCase();
@@ -207,9 +206,27 @@ const Destination = () => {
   };
 
   const iconUrl = (difficulty) => {
-    if (difficulty === 'Challenging') return require('../icons/red-marker.png');
-    if (difficulty === 'Moderate') return require('../icons/orange-marker.png');
-    return require('../icons/green-marker.png');
+    let color, textColor;
+    switch(difficulty) {
+      case 'Challenging':
+        color = 'red';
+        textColor = 'white';
+        break;
+      case 'Moderate':
+        color = 'orange';
+        textColor = 'black';
+        break;
+      default:
+        color = 'green';
+        textColor = 'white';
+    }
+
+    return divIcon({
+      className: 'custom-marker',
+      html: `<div style="background-color:${color};color:${textColor};border-radius:50%;width:30px;height:30px;display:flex;align-items:center;justify-content:center;">
+        ${difficulty[0]}
+      </div>`
+    });
   };
 
   const calculateDistance = (destination) => {
@@ -298,10 +315,7 @@ const Destination = () => {
                 <Marker
                   key={destination.id}
                   position={destination.location}
-                  icon={new Icon({
-                    iconUrl: iconUrl(destination.difficulty),
-                    iconSize: [32, 32],
-                  })}
+                  icon={iconUrl(destination.difficulty)}
                   eventHandlers={{
                     click: () => handleSelect(destination),
                   }}
