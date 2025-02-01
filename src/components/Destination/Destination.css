@@ -1,0 +1,248 @@
+/* ================ */
+/* Destination Page */
+/* ================ */
+
+.destination-page {
+    padding: 4rem 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+    background: #f8f9fa;
+    min-height: 100vh;
+    font-family: 'Inter', sans-serif;
+    color: #2b2d42;
+  }
+  
+  /* Header Section */
+  .destination-header {
+    text-align: center;
+    margin-bottom: 3rem;
+    padding: 3rem 2rem;
+    background: linear-gradient(135deg, #ffffff 0%, #f5f7fa 100%);
+    border-radius: 1.25rem;
+    box-shadow: 0 2.4rem 4.8rem rgba(0,0,0,0.03);
+    border: 1px solid rgba(255,255,255,0.9);
+  }
+  
+  .destination-header h1 {
+    font-size: 2.75rem;
+    margin-bottom: 1.25rem;
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    color: #1a1c2e;
+  }
+  
+  .destination-header p {
+    color: #4a5568;
+    font-size: 1.1rem;
+    max-width: 680px;
+    margin: 0 auto 2.5rem;
+    line-height: 1.6;
+  }
+  
+  /* Search Input */
+  .search-container {
+    max-width: 480px;
+    margin: 0 auto;
+    position: relative;
+  }
+  
+  .search-input {
+    width: 100%;
+    padding: 1.1rem 2rem;
+    border: 2px solid #e2e8f0;
+    border-radius: 2.5rem;
+    font-size: 1rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    background: #ffffff;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+  }
+  
+  .search-input:focus {
+    border-color: #4a90e2;
+    box-shadow: 0 0 0 3px rgba(74,144,226,0.15);
+    outline: none;
+  }
+  
+  /* Main Content Grid */
+  .destination-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3.5rem;
+    align-items: start;
+  }
+  
+  /* Trails List */
+  .trails-list {
+    display: grid;
+    gap: 1.75rem;
+    position: relative;
+  }
+  
+  .trail-card {
+    background: #ffffff;
+    padding: 1.75rem;
+    border-radius: 1rem;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    border: 1px solid rgba(226,232,240,0.6);
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .trail-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+  }
+  
+  .trail-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, #4a90e2 0%, #63b3ed 100%);
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+  }
+  
+  .trail-card:hover::after {
+    transform: scaleX(1);
+  }
+  
+  .trail-meta {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+  
+  .difficulty {
+    padding: 0.35rem 1rem;
+    border-radius: 1rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+  }
+  
+  .difficulty.easy { background: #f0fff4; color: #2f855a; }
+  .difficulty.moderate { background: #fffaf0; color: #c05621; }
+  .difficulty.challenging { background: #fff5f5; color: #c53030; }
+  .difficulty.hard { background: #f8fafc; color: #2b6cb0; }
+  
+  .duration {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #4a5568;
+    font-size: 0.95rem;
+  }
+  
+  /* Map Container */
+  .map-container {
+    position: sticky;
+    top: 2rem;
+    height: 75vh;
+    min-height: 500px;
+    background: white;
+    border-radius: 1.25rem;
+    box-shadow: 0 2.4rem 4.8rem rgba(0,0,0,0.03);
+    border: 1px solid rgba(226,232,240,0.6);
+    overflow: hidden;
+    isolation: isolate;
+  }
+  
+  .leaflet-container {
+    height: 100% !important;
+    width: 100% !important;
+    background: #f8fafc !important;
+    font-family: 'Inter', sans-serif !important;
+  }
+  
+  .leaflet-control {
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06) !important;
+    border-radius: 8px !important;
+  }
+  
+  /* Hiking Tips */
+  .hiking-tips {
+    margin-top: 4rem;
+    padding: 3rem;
+    background: linear-gradient(135deg, #ffffff 0%, #f5f7fa 100%);
+    border-radius: 1.25rem;
+    box-shadow: 0 2.4rem 4.8rem rgba(0,0,0,0.03);
+  }
+  
+  .hiking-tips h2 {
+    font-family: 'Playfair Display', serif;
+    text-align: center;
+    margin-bottom: 2.5rem;
+    font-size: 2.25rem;
+  }
+  
+  .tips-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .tip-card {
+    padding: 1.5rem;
+    background: rgba(255,255,255,0.9);
+    border-radius: 0.75rem;
+    border: 1px solid rgba(226,232,240,0.6);
+    transition: transform 0.25s ease;
+  }
+  
+  .tip-card:hover {
+    transform: translateY(-3px);
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 1280px) {
+    .destination-container {
+      gap: 2.5rem;
+    }
+  }
+  
+  @media (max-width: 1024px) {
+    .destination-container {
+      grid-template-columns: 1fr;
+    }
+  
+    .map-container {
+      position: relative;
+      top: auto;
+      order: -1;
+      height: 60vh;
+      min-height: 400px;
+      margin-bottom: 2.5rem;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .destination-page {
+      padding: 2rem 1.5rem;
+    }
+  
+    .destination-header {
+      padding: 2rem 1.5rem;
+    }
+  
+    .hiking-tips {
+      padding: 2rem 1.5rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .trail-card {
+      padding: 1.5rem;
+    }
+  
+    .map-container {
+      height: 50vh;
+      min-height: 350px;
+    }
+  }
