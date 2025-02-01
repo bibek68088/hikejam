@@ -5,6 +5,7 @@ import Footer from './components/Footer/Footer';
 import LandingPage from './components/LandingPage/LandingPage';
 import FeaturedSection from './components/FeatureSection/FeaturedSection';
 import Destination from './components/Destination/Destination';
+import AboutUs from './components/AboutUs/AboutUs';
 
 const App = () => {
   return (
@@ -19,6 +20,7 @@ const App = () => {
             </>
           } />
           <Route path="/destinations" element={<Destination />} />
+          <Route path="/aboutus" element={<AboutUs/>}/>
         </Routes>
         <Footer />
       </div>
