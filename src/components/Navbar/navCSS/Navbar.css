@@ -1,0 +1,130 @@
+/* General Navbar styling */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 30px;
+    background-color: #174753; /* Dark green background */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    transition: background-color 0.3s ease;
+}
+
+/* Logo container */
+.nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Logo text styling */
+.nav-logo p {
+    color: #fff;
+    font-size: 28px;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+/* Logo image styling */
+.nav-logo img {
+    width: 40px; /* Adjust logo size */
+    height: auto;
+}
+
+/* Navbar menu */
+.nav-menu {
+    display: flex;
+    align-items: center;
+    list-style-type: none;
+    gap: 30px;
+    font-weight: 500;
+    margin: 0;
+}
+
+/* Navbar menu items */
+.nav-menu li {
+    position: relative;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+/* Active menu item (selected) */
+.nav-menu li.active::after {
+    content: "";
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    width: 100%;
+    height: 2px;
+    background-color: #fff;
+    transform: translateX(-50%);
+    transition: width 0.3s ease-in-out;
+}
+
+/* Hamburger icon styling */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 25px;
+    cursor: pointer;
+}
+
+.hamburger .bar {
+    width: 100%;
+    height: 4px;
+    background-color: #fff;
+    border-radius: 10px;
+}
+
+/* Responsive Styles */
+
+/* For tablets and smaller devices */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column; /* Stack the navbar items vertically */
+        padding: 12px 20px; /* Adjust padding */
+        background-color: rgba(23, 71, 83, 0.9); /* Semi-transparent background */
+    }
+
+    .nav-menu {
+        display: none; /* Hide the menu by default */
+        flex-direction: column; /* Stack menu items vertically */
+        gap: 20px;
+        width: 100%;
+        text-align: center;
+        margin-top: 15px; /* Add some space above the menu */
+    }
+
+    .nav-menu.show {
+        display: flex; /* Show menu when toggle button is clicked */
+    }
+
+    .nav-logo img {
+        width: 35px; /* Reduce logo size for mobile */
+    }
+
+    .nav-logo p {
+        font-size: 24px; /* Adjust font size */
+    }
+
+    /* Show the hamburger icon */
+    .hamburger {
+        display: flex;
+    }
+
+    /* Menu items on hover */
+    .nav-menu li:hover {
+        color: #ff7b7b; /* Change color on hover */
+    }
+}
+
+/* For mobile screens (smallest size) */
+@media (max-width: 480px) {
+    .nav-menu li.active::after {
+        width: 60px; /* Adjust active width for smaller screens */
+    }
+}
