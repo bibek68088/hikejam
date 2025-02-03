@@ -1,0 +1,39 @@
+[
+    {
+      "id": 1,
+      "title": "Sunset View",
+      "description": "A beautiful sunset from the hike.",
+      "imageUrl": "https://res.cloudinary.com/dwehxenro/image/upload/v1738488599/IMG_20230707_133107_ixf810.jpg"
+    },
+    {
+      "id": 2,
+      "title": "Mountain Trail",
+      "description": "A scenic trail leading to the peaks.",
+      "imageUrl": "https://res.cloudinary.com/dwehxenro/image/upload/v1738488583/IMG_20230130_124640_irmfec.jpg"
+    },
+    {
+      "id": 3,
+      "title": "Lush Green Valley",
+      "description": "A beautiful valley covered in greenery.",
+      "imageUrl": "https://res.cloudinary.com/dwehxenro/image/upload/v1738490000/IMG_20230708_140000_nature.jpg"
+    },
+    {
+      "id": 4,
+      "title": "Rocky Cliffs",
+      "description": "Steep rocky cliffs along the hiking trail.",
+      "imageUrl": "https://res.cloudinary.com/dwehxenro/image/upload/v1738490100/IMG_20230709_150000_cliffs.jpg"
+    },
+    {
+      "id": 5,
+      "title": "Forest Path",
+      "description": "A narrow path through dense woods.",
+      "imageUrl": "https://res.cloudinary.com/dwehxenro/image/upload/v1738490200/IMG_20230710_160000_forest.jpg"
+    },
+    {
+      "id": 6,
+      "title": "Lake Reflection",
+      "description": "A calm lake reflecting the mountains.",
+      "imageUrl": "https://res.cloudinary.com/dwehxenro/image/upload/v1738490300/IMG_20230711_170000_lake.jpg"
+    }
+  ]
+      
