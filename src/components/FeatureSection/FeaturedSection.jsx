@@ -5,7 +5,7 @@ import { destinations } from '../../data.js';
 const FeaturedSection = () => {
   return (
     <section className="featured-section">
-      <h2 className="section-title">Explore Our Destinations</h2>
+      <h2 className="section-title">Explore Our Top Picks</h2>
       {destinations.map((destination, index) => {
         const isEven = index % 2 === 0;
         return (
