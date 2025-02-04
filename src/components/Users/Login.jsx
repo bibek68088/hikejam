@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Mail, Lock, Eye, EyeOff } from 'lucide-react';
 import './user.css';
-import workspaceImg from '../assets/workspace.svg';
+import workspaceImg from '../assets/p4.jpg';
 
 const Login = () => {
   const [formData, setFormData] = useState({

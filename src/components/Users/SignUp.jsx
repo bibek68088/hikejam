@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { User, Mail, Phone, MapPin, Lock, Eye, EyeOff } from 'lucide-react';
 import './user.css';
-import workspaceImg from '../assets/workspace.svg';
+import workspaceImg from '../assets/p2.jpg';
 
 const Signup = () => {
   const [formData, setFormData] = useState({
