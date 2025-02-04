@@ -11,6 +11,7 @@ import Gallery from "./components/Gallery/Gallery";
 import ContactUs from "./components/Navbar/components/ContactPage";
 import Signup from "./components/Users/SignUp";
 import Login from "./components/Users/Login";
+import Blog from "./components/Blog/Blog";
 
 const App = () => {
   return (
@@ -28,6 +29,7 @@ const App = () => {
             }
           />
           <Route path="/aboutus" element={<AboutUs />} />
+          <Route path="/blog" element={<Blog />}/>
           <Route path="/destinations" element={<Destination />} />
           <Route path="/aboutus" element={<AboutUs />} />
           <Route path="/gallery" element={<Gallery />} />
