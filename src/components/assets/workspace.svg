@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <!-- Desk -->
+  <rect x="50" y="150" width="300" height="10" fill="#4fd1c5"/>
+  <!-- Drawer -->
+  <rect x="60" y="160" width="80" height="60" fill="#4fd1c5"/>
+  <!-- Monitor -->
+  <rect x="150" y="100" width="120" height="80" fill="#718096"/>
+  <!-- Lamp -->
+  <path d="M170 190 L250 190 L210 210 Z" fill="#4fd1c5"/>
+  <!-- Desk items -->
+  <circle cx="350" cy="130" r="20" fill="#FF4AA2"/>
+  <!-- Speaker -->
+  <rect x="80" y="130" width="20" height="30" fill="#4fd1c5"/>
+</svg>
