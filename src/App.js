@@ -9,6 +9,7 @@ import AboutUs from './components/AboutUs/AboutUs';
 import Destination from './components/Destination/Destination';
 import Gallery from './components/Gallery/Gallery';
 import ContactUs from './components/Navbar/components/ContactPage';
+import FeaturedSection from './components/FeaturedSection/FeaturedSection';
 
 const App = () => {
   return (
@@ -20,6 +21,7 @@ const App = () => {
             <>
               <LandingPage/>
               <TopContent />
+              <FeaturedSection/>
             </>
           } />
           <Route path="/aboutus" element={<AboutUs />} />
