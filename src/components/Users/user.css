@@ -1,0 +1,299 @@
+.auth-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: white;
+  padding: 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+.auth-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 300px;
+  height: 300px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 0 0 0 100%;
+}
+
+.auth-card {
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+  width: 100%;
+  max-width: 1000px;
+  display: flex;
+  overflow: hidden;
+}
+
+.auth-illustration {
+  flex: 1;
+  background-color: #ffffff;
+  padding: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.workspace-image {
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+}
+
+.auth-form {
+  flex: 1;
+  padding: 40px;
+  background-color: #ffffff;
+}
+
+.auth-form h2 {
+  color: #4d43dc;
+  font-size: 24px;
+  margin-bottom: 18px;
+  text-align: center;
+}
+
+.auth-subtitle {
+  color: #666;
+  font-size: 16px;
+  text-align: justify;
+  margin-bottom: 30px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 14px;
+  transition: border-color 0.3s ease;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #3e40c0;
+}
+
+.auth-button {
+  width: 100%;
+  padding: 12px;
+  background-color: #3e40c0;
+  color: white;
+  border: none;
+  border-radius: 25px;
+  font-size: 16px;
+  cursor: pointer;
+  margin: 20px 0;
+  transition: background-color 0.3s ease;
+}
+
+.auth-button:hover {
+  background-color: #4161d4;
+}
+
+.auth-footer {
+  text-align: center;
+  margin-top: 20px;
+  color: #666;
+  font-size: 14px;
+}
+
+.auth-footer a {
+  color: #ff4aa2;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.auth-footer a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .auth-card {
+    flex-direction: column;
+  }
+
+  .auth-illustration {
+    padding: 20px;
+  }
+
+  .auth-form {
+    padding: 20px;
+  }
+
+  .workspace-image {
+    max-width: 300px;
+  }
+}
+
+.auth-form .forgot-password {
+  text-align: right;
+  margin-bottom: 20px;
+}
+
+.auth-form .forgot-password a {
+  color: #666;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.auth-form .forgot-password a:hover {
+  color: #ff4aa2;
+  text-decoration: underline;
+}
+
+/* Optional: Add a subtle animation for form submission */
+.auth-button:active {
+  transform: scale(0.98);
+}
+
+/* Optional: Add focus states for better accessibility */
+.form-group input:focus {
+  box-shadow: 0 0 0 2px rgba(255, 74, 162, 0.1);
+}
+
+/* Add these new styles to your existing CSS file */
+.input-icon-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-icon {
+  position: absolute;
+  left: 12px;
+  color: #666;
+}
+
+/* Update input padding to accommodate icons */
+.form-group input {
+  width: 100%;
+  padding: 12px 15px 12px 40px; /* Added left padding for icon */
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 14px;
+  transition: border-color 0.3s ease;
+}
+
+/* Optional: Add icon color transition on input focus */
+.input-icon-wrapper:focus-within .input-icon {
+  color: #3e40c0;
+  transition: color 0.3s ease;
+}
+
+/* Add these new styles to your existing CSS file */
+
+.input-icon-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-icon {
+  position: absolute;
+  left: 12px;
+  color: #666;
+  transition: color 0.3s ease;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 12px 15px 12px 40px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+/* Password toggle button styles */
+.password-toggle {
+  position: absolute;
+  right: 12px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #666;
+  transition: color 0.3s ease;
+}
+
+.password-toggle:hover {
+  color: #3e40c0;
+}
+
+.password-toggle:focus {
+  outline: none;
+}
+
+.password-toggle-icon {
+  transition: color 0.3s ease;
+}
+
+/* Error states */
+.form-group input.error {
+  border-color: #ff4d4f;
+  background-color: #fff1f0;
+}
+
+.form-group input.error:focus {
+  box-shadow: 0 0 0 2px rgba(255, 77, 79, 0.2);
+}
+
+.error-message {
+  color: #ff4d4f;
+  font-size: 12px;
+  margin-top: 4px;
+  margin-left: 4px;
+  animation: fadeIn 0.3s ease;
+}
+
+/* Focus states */
+.form-group input:focus {
+  border-color: #3e40c0;
+  box-shadow: 0 0 0 2px rgba(62, 64, 192, 0.1);
+}
+
+.form-group input:focus + .input-icon {
+  color: #3e40c0;
+}
+
+/* Animation for error messages */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Adjust input padding for password fields */
+.form-group input[type="password"],
+.form-group input[name="password"] {
+  padding-right: 40px;
+}
+
+/* Optional: Add disabled state styles */
+.form-group input:disabled {
+  background-color: #f5f5f5;
+  cursor: not-allowed;
+}
+
+/* Optional: Success state */
+.form-group input.success {
+  border-color: #52c41a;
+}
