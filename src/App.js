@@ -12,35 +12,46 @@ import ContactUs from "./components/Navbar/components/ContactPage";
 import Signup from "./components/Users/SignUp";
 import Login from "./components/Users/Login";
 import Blog from "./components/Blog/Blog";
+import AdminDashboard from "./components/admin/AdminDashboard";
+import { ProtectedAdminRoute } from "./components/admin/ProtectedRoute";
+import { AuthProvider } from "./components/admin/AuthContent";
 
 const App = () => {
   return (
-    <BrowserRouter>
-      <div>
-        <Navbar />
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <>
-                <LandingPage />
-                <TopContent />
-              </>
-            }
-          />
-          <Route path="/aboutus" element={<AboutUs />} />
-          <Route path="/blog" element={<Blog />}/>
-          <Route path="/destinations" element={<Destination />} />
-          <Route path="/aboutus" element={<AboutUs />} />
-          <Route path="/gallery" element={<Gallery />} />
-          <Route path="/gallery" element={<Gallery />} />
-          <Route path="/contact" element={<ContactUs />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
-        </Routes>
-        <Footer />
-      </div>
-    </BrowserRouter>
+    <AuthProvider>
+      <BrowserRouter>
+        <div>
+          <Navbar />
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <>
+                  <LandingPage />
+                  <TopContent />
+                </>
+              }
+            />
+            <Route
+              path="/admin-dashboard"
+              element={
+                <ProtectedAdminRoute>
+                  <AdminDashboard />
+                </ProtectedAdminRoute>
+              }
+            />
+            <Route path="/aboutus" element={<AboutUs />} />
+            <Route path="/blog" element={<Blog />} />
+            <Route path="/destinations" element={<Destination />} />
+            <Route path="/gallery" element={<Gallery />} />
+            <Route path="/contact" element={<ContactUs />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<Signup />} />
+          </Routes>
+          <Footer />
+        </div>
+      </BrowserRouter>
+    </AuthProvider>
   );
 };
 
