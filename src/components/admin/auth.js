@@ -1,7 +1,6 @@
 export const logout = () => {
     localStorage.removeItem("userRole")
     localStorage.setItem("isLoggedIn", "false")
-    // You might want to add additional cleanup here
     window.location.href = "/"
   }
   

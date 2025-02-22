@@ -8,6 +8,10 @@ import "./user.css"
 import workspaceImg from "../assets/p4.jpg"
 
 const Login = () => {
+  const { login } = useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -19,7 +23,6 @@ const Login = () => {
   const [showPassword, setShowPassword] = useState(false)
   const [errors, setErrors] = useState({})
   const [isLoading, setIsLoading] = useState(false)
-  const navigate = useNavigate()
 
   // Add admin credentials (In a real app, this would be handled securely on the backend)
   const ADMIN_CREDENTIALS = {
