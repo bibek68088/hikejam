@@ -4,14 +4,17 @@ import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { Mail, Lock, Eye, EyeOff } from "lucide-react"
 import { toast, Toaster } from "react-hot-toast"
+import { login } from "../admin/auth"
 import "./user.css"
 import workspaceImg from "../assets/p4.jpg"
 
+const ADMIN_CREDENTIALS = {
+  email: "admin@hikejam.com",
+  password: "admin123",
+}
+
 const Login = () => {
-  const { login } = useAuth();
-  const navigate = useNavigate();
-  const location = useLocation();
-  const from = location.state?.from?.pathname || "/";
+  const navigate = useNavigate()
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -23,12 +26,6 @@ const Login = () => {
   const [showPassword, setShowPassword] = useState(false)
   const [errors, setErrors] = useState({})
   const [isLoading, setIsLoading] = useState(false)
-
-  // Add admin credentials (In a real app, this would be handled securely on the backend)
-  const ADMIN_CREDENTIALS = {
-    email: "admin@hikejam.com",
-    password: "admin123",
-  }
 
   const validateEmail = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
@@ -100,46 +97,30 @@ const Login = () => {
     e.preventDefault()
     setIsLoading(true)
 
-    // Mark all fields as touched
     setTouched({
       email: true,
       password: true,
     })
 
-    // Validate all fields
     const isEmailValid = validate("email", formData.email)
     const isPasswordValid = validate("password", formData.password)
 
     if (isEmailValid && isPasswordValid) {
       try {
-        // Simulate API call with timeout
         await new Promise((resolve) => setTimeout(resolve, 1000))
 
         const isAdmin = checkIfAdmin(formData.email, formData.password)
 
-        if (isAdmin) {
-          // Store admin status in localStorage or state management system
-          localStorage.setItem("userRole", "admin")
-          localStorage.setItem("isLoggedIn", "true")
-          toast.success("Admin login successful!", {
-            duration: 3000,
-            position: "top-center",
-          })
-          setTimeout(() => {
-            navigate("/admin/dashboard")
-          }, 3000)
-        } else {
-          // Regular user login
-          localStorage.setItem("userRole", "user")
-          localStorage.setItem("isLoggedIn", "true")
-          toast.success("Login successful!", {
-            duration: 3000,
-            position: "top-center",
-          })
-          setTimeout(() => {
-            navigate("/dashboard")
-          }, 3000)
-        }
+        login(isAdmin ? "admin" : "user")
+
+        toast.success(`${isAdmin ? "Admin" : "User"} login successful!`, {
+          duration: 3000,
+          position: "top-center",
+        })
+
+        setTimeout(() => {
+          navigate(isAdmin ? "/admin/dashboard" : "/dashboard")
+        }, 3000)
       } catch (error) {
         toast.error("Login failed. Please try again.", {
           duration: 3000,
