@@ -1,2 +1,5 @@
 Clone the project
-npm intsall
+  npm intsall
+  Libraries: 
+            npm i recharts
+            npm i react-hot-toast
