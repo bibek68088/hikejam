@@ -15,7 +15,7 @@ import AdminDashboard from "./components/admin/AdminDashboard"
 import UserDashboard from "./components/Users/UserDashboard"
 import { ProtectedAdminRoute } from "./routes/ProtectedAdminRoute"
 import { ProtectedUserRoute } from "./routes/ProtectedUserRoute"
-
+import FeaturedSection from "./components/FeatureSection/FeaturedSection"
 const App = () => {
   // Helper function to wrap elements with Navbar and Footer
   const withLayout = (element) => (
@@ -35,7 +35,8 @@ const App = () => {
           element={withLayout(
             <>
               <LandingPage />
-              <TopContent />
+              <FeaturedSection/>
+              
             </>,
           )}
         />
