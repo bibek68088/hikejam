@@ -8,6 +8,7 @@ import {
   BarChart2,
   Settings,
   Bell,
+  Map,
   Search,
   ChevronDown,
   ChevronUp,
@@ -23,6 +24,7 @@ import {
 } from "recharts";
 import "./AdminDashboard.css";
 import BlogManagement from "./components/BlogManagement";
+import DestinationManagement from "./components/DestinationManagement/DestinationManagement";
 
 const visitorData = [
   { name: "Jan", value: 400 },
@@ -89,6 +91,15 @@ const AdminDashboard = () => {
             <span>Bookings</span>
           </button>
           <button
+            className={`nav-item ${
+              activeTab === "destinations" ? "active" : ""
+            }`}
+            onClick={() => setActiveTab("destinations")}
+          >
+            <Map size={20} />
+            <span>Destinations</span>
+          </button>
+          <button
             className={`nav-item ${activeTab === "blogs" ? "active" : ""}`}
             onClick={() => setActiveTab("blogs")}
           >
@@ -105,9 +116,7 @@ const AdminDashboard = () => {
         </nav>
       </div>
 
-      {/* Main Content */}
       <div className="main-content">
-        {/* Top Bar */}
         <div className="top-bar">
           <div className="search-bar">
             <Search size={20} />
@@ -128,10 +137,8 @@ const AdminDashboard = () => {
           </div>
         </div>
 
-        {/* Render content based on active tab */}
         {activeTab === "dashboard" && (
           <>
-            {/* Stats Cards */}
             <div className="stats-grid">
               {stats.map((stat, index) => (
                 <div key={index} className="stat-card">
@@ -147,7 +154,6 @@ const AdminDashboard = () => {
               ))}
             </div>
 
-            {/* Chart */}
             <div className="chart-container">
               <h3>Visitor Statistics</h3>
               <ResponsiveContainer width="100%" height={300}>
@@ -169,8 +175,11 @@ const AdminDashboard = () => {
           </>
         )}
 
-        {/* Render BlogManagement component when blogs tab is active */}
         {activeTab === "blogs" && <BlogManagement />}
+        {activeTab === "users" && <h1>Users</h1>}
+        {activeTab === "bookings" && <h1>Bookings</h1>}
+        {activeTab === "destinations" && <DestinationManagement />}
+        {activeTab === "settings" && <h1>Settings</h1>}
       </div>
     </div>
   );
