@@ -1,4 +1,6 @@
-import { useState, useEffect } from "react"
+"use client"
+
+import { useState, useEffect, useRef } from "react"
 import "./DestinationManagement.css"
 import hikingDestinations from "../../data/hikingDestinations"
 
@@ -23,6 +25,8 @@ const DestinationManagement = () => {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false)
   const [sortBy, setSortBy] = useState("name")
   const [sortOrder, setSortOrder] = useState("asc")
+  const [imagePreview, setImagePreview] = useState(null)
+  const fileInputRef = useRef(null)
 
   // Load destinations from local storage or use initial data
   useEffect(() => {
@@ -53,6 +57,20 @@ const DestinationManagement = () => {
       setFilteredDestinations(hikingDestinations)
     }
   }, [])
+
+  // Set image preview when form data changes
+  useEffect(() => {
+    if (formData.image) {
+      // Check if it's a base64 image or a URL
+      if (formData.image.startsWith("data:image")) {
+        setImagePreview(formData.image)
+      } else {
+        setImagePreview(formData.image)
+      }
+    } else {
+      setImagePreview(null)
+    }
+  }, [formData.image])
 
   // Filter destinations based on search query
   useEffect(() => {
@@ -123,6 +141,36 @@ const DestinationManagement = () => {
     }
   }
 
+  const handleImageUpload = (e) => {
+    const file = e.target.files[0]
+    if (!file) return
+
+    // Validate file is an image
+    if (!file.type.match("image.*")) {
+      alert("Please select an image file (jpg, png, etc.)")
+      return
+    }
+
+    // Validate file size (limit to 5MB)
+    if (file.size > 5 * 1024 * 1024) {
+      alert("Image size should be less than 5MB")
+      return
+    }
+
+    const reader = new FileReader()
+    reader.onload = (event) => {
+      setFormData({
+        ...formData,
+        image: event.target.result,
+      })
+    }
+    reader.readAsDataURL(file)
+  }
+
+  const triggerFileInput = () => {
+    fileInputRef.current.click()
+  }
+
   const handleSort = (field) => {
     if (sortBy === field) {
       // Toggle sort order if clicking the same field
@@ -147,8 +195,14 @@ const DestinationManagement = () => {
       image: "",
       reviews: [],
     })
+    setImagePreview(null)
     setIsEditing(false)
     setCurrentDestination(null)
+
+    // Reset file input
+    if (fileInputRef.current) {
+      fileInputRef.current.value = ""
+    }
   }
 
   const handleSelect = (destination) => {
@@ -421,15 +475,45 @@ const DestinationManagement = () => {
             </div>
 
             <div className="destination-form-group">
-              <label htmlFor="image">Image URL</label>
-              <input
-                type="text"
-                id="image"
-                name="image"
-                value={formData.image}
-                onChange={handleInputChange}
-                placeholder="/assets/image.jpg"
-              />
+              <label>Destination Image</label>
+              <div className="destination-image-upload">
+                <input
+                  type="file"
+                  ref={fileInputRef}
+                  onChange={handleImageUpload}
+                  accept="image/*"
+                  className="destination-file-input"
+                  aria-label="Upload destination image"
+                />
+                <div className="destination-image-controls">
+                  <button type="button" className="destination-upload-button" onClick={triggerFileInput}>
+                    Choose Image
+                  </button>
+                  <input
+                    type="text"
+                    name="image"
+                    value={formData.image}
+                    onChange={handleInputChange}
+                    placeholder="Or enter image URL"
+                    className="destination-image-url"
+                  />
+                </div>
+                {imagePreview && (
+                  <div className="destination-image-preview">
+                    <img src={imagePreview || "/placeholder.svg"} alt="Destination preview" />
+                    <button
+                      type="button"
+                      className="destination-remove-image"
+                      onClick={() => {
+                        setFormData({ ...formData, image: "" })
+                        if (fileInputRef.current) fileInputRef.current.value = ""
+                      }}
+                    >
+                      ✕
+                    </button>
+                  </div>
+                )}
+              </div>
             </div>
 
             <div className="destination-form-actions">

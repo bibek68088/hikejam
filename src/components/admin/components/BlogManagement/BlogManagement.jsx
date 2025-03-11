@@ -10,7 +10,7 @@ import {
   User,
   Tag,
 } from "lucide-react";
-import blogsData from "../../Blog/blogs";
+import blogsData from "../../../Blog/blogs";
 import "./BlogManagement.css";
 
 const BlogManagement = () => {

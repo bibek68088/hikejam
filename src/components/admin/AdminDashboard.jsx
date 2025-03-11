@@ -23,7 +23,7 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import "./AdminDashboard.css";
-import BlogManagement from "./components/BlogManagement";
+import BlogManagement from "./components/BlogManagement/BlogManagement";
 import DestinationManagement from "./components/DestinationManagement/DestinationManagement";
 
 const visitorData = [

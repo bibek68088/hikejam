@@ -1,3 +1,4 @@
+/* DestinationManagement.css - Scoped to avoid conflicts with admin dashboard */
 :root {
   --dm-primary: #3b82f6;
   --dm-primary-dark: #2563eb;
@@ -448,6 +449,93 @@
   display: flex;
   justify-content: flex-end;
   gap: 0.75rem;
+}
+
+/* Image upload styles */
+.destination-image-upload {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.destination-file-input {
+  display: none;
+}
+
+.destination-image-controls {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.destination-upload-button {
+  background-color: var(--dm-gray-200);
+  color: var(--dm-gray-800);
+  border: 1px solid var(--dm-gray-300);
+  padding: 0.625rem 1rem;
+  border-radius: var(--dm-radius);
+  cursor: pointer;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: var(--dm-transition);
+  flex-shrink: 0;
+}
+
+.destination-upload-button:hover {
+  background-color: var(--dm-gray-300);
+}
+
+.destination-image-url {
+  flex: 1;
+  padding: 0.625rem 0.75rem;
+  border-radius: var(--dm-radius);
+  border: 1px solid var(--dm-gray-300);
+  font-size: 0.875rem;
+  transition: var(--dm-transition);
+}
+
+.destination-image-url:focus {
+  outline: none;
+  border-color: var(--dm-primary);
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+}
+
+.destination-image-preview {
+  position: relative;
+  width: 100%;
+  max-width: 300px;
+  margin-top: 0.5rem;
+  border-radius: var(--dm-radius);
+  overflow: hidden;
+  border: 1px solid var(--dm-gray-300);
+}
+
+.destination-image-preview img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+.destination-remove-image {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: none;
+  font-size: 0.75rem;
+  transition: var(--dm-transition);
+}
+
+.destination-remove-image:hover {
+  background-color: rgba(0, 0, 0, 0.7);
 }
 
 /* Responsive adjustments */
