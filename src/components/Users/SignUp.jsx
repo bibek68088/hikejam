@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom"
 import { User, Mail, Phone, MapPin, Lock, Eye, EyeOff } from "lucide-react"
 import { toast, Toaster } from "react-hot-toast"
 import "./user.css"
-import workspaceImg from "../assets/p2.jpg"
+import workspaceImg from "../../assets/p2.jpg"
 
 const Signup = () => {
   const [formData, setFormData] = useState({

@@ -1,6 +1,6 @@
 import React from "react";
 import "./LandingPage.css";
-import heroVideo from "../assets/video.mp4";
+import heroVideo from "../../assets/video.mp4";
 import { loadFull } from "tsparticles";
 
 const LandingPage = () => {

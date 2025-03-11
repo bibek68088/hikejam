@@ -6,7 +6,7 @@ import { Mail, Lock, Eye, EyeOff } from "lucide-react"
 import { toast, Toaster } from "react-hot-toast"
 import { login } from "../admin/auth"
 import "./user.css"
-import workspaceImg from "../assets/p4.jpg"
+import workspaceImg from "../../assets/p4.jpg"
 
 const ADMIN_CREDENTIALS = {
   email: "admin@hikejam.com",

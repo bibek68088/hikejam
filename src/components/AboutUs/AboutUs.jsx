@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import "./AboutUs.css";
-import hikingImage from "../assets/aboutus.jpg"; // Background Image
-import teamImage from "../assets/team_image.jpg"; // Team Image
-import missionImage from "../assets/mission.jpg"; // Mission Image
+import hikingImage from "../../assets/aboutus.jpg"; // Background Image
+import teamImage from "../../assets/team_image.jpg"; // Team Image
+import missionImage from "../../assets/mission.jpg"; // Mission Image
 import { motion } from "framer-motion"; // For smooth animations
 
 const AboutUs = () => {

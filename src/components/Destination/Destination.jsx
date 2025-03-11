@@ -4,7 +4,7 @@ import { divIcon } from "leaflet";
 import "./Destination.css";
 import { ErrorBoundary } from "react-error-boundary";
 import { useMemo } from "react";
-import SearchIcon from "../assets/search.png";
+import SearchIcon from "../../assets/search.png";
 
 // Hiking destinations data
 const hikingDestinations = [
