@@ -1,19 +1,21 @@
-import type { Metadata } from "next";
+// app/layout.tsx
+import Layout from "../components/Layout";
+import { ReactNode } from "react";
+import { Toaster } from "react-hot-toast";
 
-export const metadata: Metadata = {
+export const metadata = {
   title: "Hikejam",
   description: "Hikejam is a platform for sharing hiking experiences and tips.",
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
       <body>
-        <div id="root">{children}</div>
+        <Layout>
+          <Toaster position="top-center" reverseOrder={false} />
+          {children}
+        </Layout>
       </body>
     </html>
   );
