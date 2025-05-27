@@ -37,7 +37,7 @@
     "components/Footer",
     "pages",
     ".next/types/**/*.ts"
-  ],
+, "components/Users", "components/Layout.tsx", "components/Navbar"  ],
   "exclude": [
     "./node_modules"
   ]

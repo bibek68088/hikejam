@@ -1,3 +1,5 @@
+"use client";
+
 import { useState } from "react";
 import {
   Users,
@@ -22,8 +24,7 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
-import "./AdminDashboard.css";
-import BlogManagement from "./components/BlogManagement";
+import BlogManagement from "./components/blog-management/BlogManagement";
 import DestinationManagement from "./components/DestinationManagement/DestinationManagement";
 
 const visitorData = [
@@ -38,7 +39,7 @@ const visitorData = [
 const AdminDashboard = () => {
   const [isSidebarCollapsed, setSidebarCollapsed] = useState(false);
   const [activeTab, setActiveTab] = useState("dashboard");
-  const [notifications, setNotifications] = useState([
+  const [notifications] = useState([
     { id: 1, text: "New user registration", time: "5 min ago" },
     { id: 2, text: "Server update completed", time: "1 hour ago" },
     { id: 3, text: "Database backup", time: "3 hours ago" },
@@ -51,14 +52,132 @@ const AdminDashboard = () => {
     { title: "Messages", value: "89", icon: MessageSquare, change: "+15%" },
   ];
 
+  const containerStyle: React.CSSProperties = {
+    display: "flex",
+    minHeight: "100vh",
+    backgroundColor: "#f8f9fa",
+  };
+
+  const sidebarStyle: React.CSSProperties = {
+    width: isSidebarCollapsed ? "80px" : "250px",
+    backgroundColor: "#fff",
+    boxShadow: "2px 0 5px rgba(0, 0, 0, 0.1)",
+    transition: "width 0.3s ease",
+    padding: "1rem",
+  };
+
+  const headerStyle: React.CSSProperties = {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+    paddingBottom: "1rem",
+    borderBottom: "1px solid #eee",
+  };
+
+  const navItemStyle = (isActive: boolean): React.CSSProperties => ({
+    display: "flex",
+    alignItems: "center",
+    gap: "0.75rem",
+    padding: "0.75rem",
+    width: "100%",
+    border: "none",
+    background: "none",
+    cursor: "pointer",
+    color: isActive ? "#4f46e5" : "#666",
+    transition: "all 0.2s ease",
+    borderRadius: "0.5rem",
+    backgroundColor: isActive ? "#e0e7ff" : "transparent",
+  });
+
+  const mainContentStyle: React.CSSProperties = {
+    flex: 1,
+    padding: "2rem",
+    overflowY: "auto",
+  };
+
+  const topBarStyle: React.CSSProperties = {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: "2rem",
+  };
+
+  const searchBarStyle: React.CSSProperties = {
+    display: "flex",
+    alignItems: "center",
+    gap: "0.5rem",
+    backgroundColor: "#fff",
+    padding: "0.5rem 1rem",
+    borderRadius: "0.5rem",
+    boxShadow: "0 2px 4px rgba(0, 0, 0, 0.05)",
+  };
+
+  const notificationBadgeStyle: React.CSSProperties = {
+    position: "absolute",
+    top: "-8px",
+    right: "-8px",
+    backgroundColor: "#ef4444",
+    color: "white",
+    fontSize: "0.75rem",
+    padding: "0.25rem 0.5rem",
+    borderRadius: "999px",
+  };
+
+  const dropdownStyle: React.CSSProperties = {
+    position: "absolute",
+    top: "100%",
+    right: 0,
+    width: "300px",
+    backgroundColor: "#fff",
+    borderRadius: "0.5rem",
+    boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+    padding: "1rem",
+  };
+
+  const statsGridStyle: React.CSSProperties = {
+    display: "grid",
+    gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
+    gap: "1.5rem",
+    marginBottom: "2rem",
+  };
+
+  const cardStyle: React.CSSProperties = {
+    backgroundColor: "#fff",
+    padding: "1.5rem",
+    borderRadius: "0.5rem",
+    boxShadow: "0 2px 4px rgba(0, 0, 0, 0.05)",
+    display: "flex",
+    alignItems: "center",
+    gap: "1rem",
+  };
+
+  const iconStyle: React.CSSProperties = {
+    padding: "1rem",
+    backgroundColor: "#e0e7ff",
+    borderRadius: "0.5rem",
+    color: "#4f46e5",
+  };
+
+  const chartContainerStyle: React.CSSProperties = {
+    backgroundColor: "#fff",
+    padding: "1.5rem",
+    borderRadius: "0.5rem",
+    boxShadow: "0 2px 4px rgba(0, 0, 0, 0.05)",
+  };
+
   return (
-    <div className="admin-container">
-      <div className={`sidebar ${isSidebarCollapsed ? "collapsed" : ""}`}>
-        <div className="sidebar-header">
-          <h2>HikeJam Admin</h2>
+    <div style={containerStyle}>
+      <div style={sidebarStyle}>
+        <div style={headerStyle}>
+          {!isSidebarCollapsed && <h2>HikeJam Admin</h2>}
           <button
             onClick={() => setSidebarCollapsed(!isSidebarCollapsed)}
-            className="collapse-btn"
+            style={{
+              background: "none",
+              border: "none",
+              color: "#666",
+              cursor: "pointer",
+            }}
           >
             {isSidebarCollapsed ? (
               <ChevronDown size={20} />
@@ -68,69 +187,56 @@ const AdminDashboard = () => {
           </button>
         </div>
 
-        <nav className="sidebar-nav">
-          <button
-            className={`nav-item ${activeTab === "dashboard" ? "active" : ""}`}
-            onClick={() => setActiveTab("dashboard")}
-          >
-            <BarChart2 size={20} />
-            <span>Dashboard</span>
-          </button>
-          <button
-            className={`nav-item ${activeTab === "users" ? "active" : ""}`}
-            onClick={() => setActiveTab("users")}
-          >
-            <Users size={20} />
-            <span>Users</span>
-          </button>
-          <button
-            className={`nav-item ${activeTab === "bookings" ? "active" : ""}`}
-            onClick={() => setActiveTab("bookings")}
-          >
-            <Package size={20} />
-            <span>Bookings</span>
-          </button>
-          <button
-            className={`nav-item ${
-              activeTab === "destinations" ? "active" : ""
-            }`}
-            onClick={() => setActiveTab("destinations")}
-          >
-            <Map size={20} />
-            <span>Destinations</span>
-          </button>
-          <button
-            className={`nav-item ${activeTab === "blogs" ? "active" : ""}`}
-            onClick={() => setActiveTab("blogs")}
-          >
-            <Cat size={20} />
-            <span>Blogs</span>
-          </button>
-          <button
-            className={`nav-item ${activeTab === "settings" ? "active" : ""}`}
-            onClick={() => setActiveTab("settings")}
-          >
-            <Settings size={20} />
-            <span>Settings</span>
-          </button>
+        <nav style={{ marginTop: "1rem" }}>
+          {[
+            { id: "dashboard", label: "Dashboard", icon: BarChart2 },
+            { id: "users", label: "Users", icon: Users },
+            { id: "bookings", label: "Bookings", icon: Package },
+            { id: "destinations", label: "Destinations", icon: Map },
+            { id: "blogs", label: "Blogs", icon: Cat },
+            { id: "settings", label: "Settings", icon: Settings },
+          ].map(({ id, label, icon: Icon }) => (
+            <button
+              key={id}
+              style={navItemStyle(activeTab === id)}
+              onClick={() => setActiveTab(id)}
+            >
+              <Icon size={20} />
+              {!isSidebarCollapsed && <span>{label}</span>}
+            </button>
+          ))}
         </nav>
       </div>
 
-      <div className="main-content">
-        <div className="top-bar">
-          <div className="search-bar">
+      <div style={mainContentStyle}>
+        <div style={topBarStyle}>
+          <div style={searchBarStyle}>
             <Search size={20} />
-            <input type="text" placeholder="Search..." />
+            <input
+              type="text"
+              placeholder="Search..."
+              style={{
+                border: "none",
+                outline: "none",
+                fontSize: "0.9rem",
+                width: "200px",
+              }}
+            />
           </div>
 
-          <div className="notifications">
+          <div style={{ position: "relative", cursor: "pointer" }}>
             <Bell size={20} />
-            <div className="notification-badge">3</div>
-            <div className="notification-dropdown">
-              {notifications.map((notification) => (
-                <div key={notification.id} className="notification-item">
-                  <p>{notification.text}</p>
-                  <span>{notification.time}</span>
+            <div style={notificationBadgeStyle}>{notifications.length}</div>
+            <div style={dropdownStyle}>
+              {notifications.map((n) => (
+                <div
+                  key={n.id}
+                  style={{ padding: "0.75rem", borderBottom: "1px solid #eee" }}
+                >
+                  <p style={{ margin: 0, fontSize: "0.9rem" }}>{n.text}</p>
+                  <span style={{ fontSize: "0.8rem", color: "#666" }}>
+                    {n.time}
+                  </span>
                 </div>
               ))}
             </div>
@@ -139,36 +245,46 @@ const AdminDashboard = () => {
 
         {activeTab === "dashboard" && (
           <>
-            <div className="stats-grid">
-              {stats.map((stat, index) => (
-                <div key={index} className="stat-card">
-                  <div className="stat-icon">
+            <div style={statsGridStyle}>
+              {stats.map((stat, idx) => (
+                <div key={idx} style={cardStyle}>
+                  <div style={iconStyle}>
                     <stat.icon size={24} />
                   </div>
-                  <div className="stat-info">
-                    <h3>{stat.title}</h3>
-                    <p className="stat-value">{stat.value}</p>
-                    <span className="stat-change">{stat.change}</span>
+                  <div>
+                    <h3
+                      style={{ margin: 0, fontSize: "0.9rem", color: "#666" }}
+                    >
+                      {stat.title}
+                    </h3>
+                    <p
+                      style={{
+                        margin: "0.25rem 0",
+                        fontSize: "1.5rem",
+                        fontWeight: "bold",
+                      }}
+                    >
+                      {stat.value}
+                    </p>
+                    <p style={{ fontSize: "0.8rem", color: "#22c55e" }}>
+                      {stat.change}
+                    </p>
                   </div>
                 </div>
               ))}
             </div>
 
-            <div className="chart-container">
-              <h3>Visitor Statistics</h3>
+            <div style={chartContainerStyle}>
+              <h3 style={{ marginBottom: "1.5rem", fontSize: "1.25rem" }}>
+                Visitor Overview
+              </h3>
               <ResponsiveContainer width="100%" height={300}>
                 <LineChart data={visitorData}>
                   <CartesianGrid strokeDasharray="3 3" />
                   <XAxis dataKey="name" />
                   <YAxis />
                   <Tooltip />
-                  <Line
-                    type="monotone"
-                    dataKey="value"
-                    stroke="#8884d8"
-                    strokeWidth={2}
-                    dot={{ fill: "#8884d8" }}
-                  />
+                  <Line type="monotone" dataKey="value" stroke="#4f46e5" />
                 </LineChart>
               </ResponsiveContainer>
             </div>
@@ -176,10 +292,7 @@ const AdminDashboard = () => {
         )}
 
         {activeTab === "blogs" && <BlogManagement />}
-        {activeTab === "users" && <h1>Users</h1>}
-        {activeTab === "bookings" && <h1>Bookings</h1>}
         {activeTab === "destinations" && <DestinationManagement />}
-        {activeTab === "settings" && <h1>Settings</h1>}
       </div>
     </div>
   );
