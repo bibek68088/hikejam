@@ -2,7 +2,7 @@
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import { ReactNode } from "react";
-
+import "../app/global.css";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
