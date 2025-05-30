@@ -1,22 +1,26 @@
-// app/layout.tsx
-import Layout from "../components/Layout";
-import { ReactNode } from "react";
-import { Toaster } from "react-hot-toast";
-import "./globals.css";
+import type React from "react";
+import "./global.css";
+// import type { Metadata } from "next";
+import { Inter } from "next/font/google";
+import Navbar from "./Navbar";
 
-export const metadata = {
-  title: "Hikejam",
-  description: "Hikejam is a platform for sharing hiking experiences and tips.",
-};
+const inter = Inter({ subsets: ["latin"] });
 
-export default function RootLayout({ children }: { children: ReactNode }) {
+// export const metadata: Metadata = {
+//   title: "HikeJam - Your Hiking Adventure",
+//   description: "Discover and plan your next hiking adventure with HikeJam",
+// };
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="en">
-      <body>
-        <Layout>
-          <Toaster position="top-center" reverseOrder={false} />
-          {children}
-        </Layout>
+      <body className={inter.className}>
+        <Navbar />
+        {children}
       </body>
     </html>
   );
