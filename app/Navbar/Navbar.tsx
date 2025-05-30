@@ -5,6 +5,8 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import Image from "next/image";
 import { useAuth } from "../../components/auth-provider";
+import logo from "../../public/logo.jpg";
+import profileImg from "../../public/cat.png";
 
 export default function Navbar() {
   const [isMobile, setIsMobile] = useState(false);
@@ -16,10 +18,8 @@ export default function Navbar() {
   const { user, logout: authLogout } = useAuth();
 
   useEffect(() => {
-    const handleResize = () => {
-      setWindowWidth(window.innerWidth);
-    };
-    setWindowWidth(window.innerWidth);
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    handleResize();
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
@@ -65,195 +65,86 @@ export default function Navbar() {
   const isActive = (path: string) => pathname === path;
   const isMobileView = windowWidth <= 768;
 
-  // Styles (keeping the same styles from original)
-  const navbarStyle = {
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    padding: "1rem 2rem",
-    background: "#fff",
-    boxShadow: "0 2px 10px rgba(0, 0, 0, 0.1)",
-    position: "sticky" as const,
-    top: 0,
-    zIndex: 1000,
-  };
-
-  const navLogoStyle = {
-    display: "flex",
-    alignItems: "center",
-    gap: "0.5rem",
-  };
-
-  const logoTextStyle = {
-    fontSize: "1.5rem",
-    fontWeight: 600,
-    color: "#2b2d42",
-    margin: 0,
-  };
-
-  const hamburgerStyle = {
-    display: isMobileView ? "flex" : "none",
-    flexDirection: "column" as const,
-    gap: "5px",
-    cursor: "pointer",
-    zIndex: 1001,
-  };
-
-  const barStyle = (index: number) => ({
-    width: "25px",
-    height: "3px",
-    background: "#2b2d42",
-    transition: "all 0.3s ease",
-    transform: isMobile
-      ? index === 0
-        ? "rotate(45deg) translate(5px, 5px)"
-        : index === 2
-        ? "rotate(-45deg) translate(5px, -5px)"
-        : "rotate(0deg)"
-      : "none",
-    opacity: isMobile && index === 1 ? 0 : 1,
-  });
-
-  const navMenuStyle = {
-    display: "flex",
-    gap: "2rem",
-    listStyle: "none",
-    margin: 0,
-    padding: 0,
-    position: isMobileView ? ("fixed" as const) : ("static" as const),
-    top: isMobileView ? 0 : "auto",
-    right: isMobileView ? (isMobile ? 0 : "-100%") : "auto",
-    height: isMobileView ? "100vh" : "auto",
-    width: isMobileView ? "70%" : "auto",
-    maxWidth: isMobileView ? "300px" : "none",
-    background: "#fff",
-    flexDirection: isMobileView ? ("column" as const) : ("row" as const),
-    justifyContent: isMobileView ? "center" : "flex-start",
-    alignItems: isMobileView ? "center" : "flex-start",
-    boxShadow: isMobileView ? "-2px 0 10px rgba(0, 0, 0, 0.1)" : "none",
-    transition: "right 0.3s ease",
-  };
-
-  const navLinkStyle = (isActiveLink: boolean) => ({
-    textDecoration: "none",
-    color: isActiveLink ? "#ff6b35" : "#4a4a4a",
-    fontWeight: 500,
-    padding: isMobileView ? "1rem" : "0.5rem 1rem",
-    borderRadius: "0.5rem",
-    transition: "all 0.3s ease",
-    position: "relative" as const,
-    fontSize: isMobileView ? "1.2rem" : "1rem",
-    display: "block",
-  });
-
-  const activeIndicatorStyle = {
-    content: '""',
-    position: "absolute" as const,
-    bottom: 0,
-    left: "50%",
-    transform: "translateX(-50%)",
-    width: "60%",
-    height: "2px",
-    background: "#ff6b35",
-  };
-
-  const profileContainerStyle = {
-    position: "relative" as const,
-  };
-
-  const profileIconStyle = {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-  };
-
-  const profileDropdownStyle = {
-    position: isMobileView ? ("static" as const) : ("absolute" as const),
-    top: isMobileView ? "auto" : "100%",
-    right: isMobileView ? "auto" : 0,
-    background: "white",
-    borderRadius: "8px",
-    boxShadow: isMobileView ? "none" : "0 2px 10px rgba(0, 0, 0, 0.1)",
-    padding: "0.5rem 0",
-    minWidth: "120px",
-    marginTop: isMobileView ? "1rem" : "0.5rem",
-    width: isMobileView ? "100%" : "auto",
-    textAlign: isMobileView ? ("center" as const) : ("left" as const),
-  };
-
-  const dropdownItemStyle = {
-    display: "block",
-    padding: "0.5rem 1rem",
-    color: "#4a4a4a",
-    textDecoration: "none",
-    transition: "background-color 0.3s ease",
-    border: "none",
-    background: "transparent",
-    width: "100%",
-    textAlign: "left" as const,
-    cursor: "pointer",
-  };
-
   return (
-    <div style={navbarStyle}>
-      <div style={navLogoStyle}>
+    <nav className="sticky top-0 z-50 bg-white shadow-md px-4 py-3 flex justify-between items-center">
+      <div className="flex items-center gap-2">
         <Image
-          src="/placeholder.svg?height=32&width=32"
+          src={logo}
           alt="logo"
           width={32}
           height={32}
-          style={{ borderRadius: "50%" }}
+          className="rounded-full"
         />
-        <p style={logoTextStyle}>HikeJam</p>
+        <p className="text-xl font-semibold text-gray-800 m-0">HikeJam</p>
       </div>
 
-      <div style={hamburgerStyle} onClick={toggleMenu}>
-        <div style={barStyle(0)}></div>
-        <div style={barStyle(1)}></div>
-        <div style={barStyle(2)}></div>
+      <div
+        className="flex flex-col gap-[5px] cursor-pointer md:hidden z-50"
+        onClick={toggleMenu}
+      >
+        <span
+          className={`h-[3px] w-[25px] bg-gray-800 transition-transform ${
+            isMobile ? "rotate-45 translate-y-[5px]" : ""
+          }`}
+        ></span>
+        <span
+          className={`h-[3px] w-[25px] bg-gray-800 transition-opacity ${
+            isMobile ? "opacity-0" : ""
+          }`}
+        ></span>
+        <span
+          className={`h-[3px] w-[25px] bg-gray-800 transition-transform ${
+            isMobile ? "-rotate-45 -translate-y-[5px]" : ""
+          }`}
+        ></span>
       </div>
 
-      <ul style={navMenuStyle}>
+      <ul
+        className={`${
+          isMobileView
+            ? `fixed top-0 right-0 h-screen w-[70%] max-w-[300px] bg-white flex flex-col items-center justify-center space-y-6 shadow-lg transition-all duration-300 ${
+                isMobile ? "right-0" : "-right-full"
+              }`
+            : "hidden md:flex md:gap-8"
+        }`}
+      >
         {navItems.map(({ href, label }) => (
           <li key={href}>
             <Link
               href={href}
-              style={navLinkStyle(isActive(href))}
-              onMouseEnter={(e) => {
-                if (!isActive(href)) {
-                  e.currentTarget.style.color = "#ff6b35";
-                }
-              }}
-              onMouseLeave={(e) => {
-                if (!isActive(href)) {
-                  e.currentTarget.style.color = "#4a4a4a";
-                }
-              }}
+              className={`relative text-[1rem] md:text-base font-medium ${
+                isActive(href) ? "text-orange-500" : "text-gray-700"
+              } hover:text-orange-500 transition`}
             >
               {label}
               {isActive(href) && !isMobileView && (
-                <div style={activeIndicatorStyle}></div>
+                <span className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-3/5 h-[2px] bg-orange-500"></span>
               )}
             </Link>
           </li>
         ))}
 
-        <li style={profileContainerStyle} ref={dropdownRef}>
-          <div style={profileIconStyle} onClick={toggleProfile}>
+        <li className="relative" ref={dropdownRef}>
+          <div
+            className="flex items-center justify-center cursor-pointer"
+            onClick={toggleProfile}
+          >
             <Image
-              src="/placeholder.svg?height=32&width=32"
+              src={profileImg}
               alt="profile"
               width={32}
               height={32}
-              style={{
-                objectFit: "cover",
-                borderRadius: "50%",
-                cursor: "pointer",
-              }}
+              className="rounded-full object-cover"
             />
           </div>
           {isProfileOpen && (
-            <div style={profileDropdownStyle}>
+            <div
+              className={`${
+                isMobileView
+                  ? "static mt-4 w-full text-center"
+                  : "absolute right-0 mt-2 min-w-[120px] bg-white shadow-lg rounded-md"
+              } z-40`}
+            >
               {user ? (
                 <>
                   <Link
@@ -262,29 +153,13 @@ export default function Navbar() {
                         ? "/admin/dashboard"
                         : "/user/dashboard"
                     }
-                    style={dropdownItemStyle}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.backgroundColor = "#f5f5f5";
-                      e.currentTarget.style.color = "#ff6b35";
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.backgroundColor = "transparent";
-                      e.currentTarget.style.color = "#4a4a4a";
-                    }}
+                    className="block w-full px-4 py-2 text-gray-700 hover:text-orange-500 hover:bg-gray-100 text-left"
                   >
                     Dashboard
                   </Link>
                   <button
                     onClick={handleLogout}
-                    style={dropdownItemStyle}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.backgroundColor = "#f5f5f5";
-                      e.currentTarget.style.color = "#ff6b35";
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.backgroundColor = "transparent";
-                      e.currentTarget.style.color = "#4a4a4a";
-                    }}
+                    className="block w-full px-4 py-2 text-gray-700 hover:text-orange-500 hover:bg-gray-100 text-left"
                   >
                     Logout
                   </button>
@@ -293,29 +168,13 @@ export default function Navbar() {
                 <>
                   <Link
                     href="/login"
-                    style={dropdownItemStyle}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.backgroundColor = "#f5f5f5";
-                      e.currentTarget.style.color = "#ff6b35";
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.backgroundColor = "transparent";
-                      e.currentTarget.style.color = "#4a4a4a";
-                    }}
+                    className="block w-full px-4 py-2 text-gray-700 hover:text-orange-500 hover:bg-gray-100 text-left"
                   >
                     Login
                   </Link>
                   <Link
                     href="/signup"
-                    style={dropdownItemStyle}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.backgroundColor = "#f5f5f5";
-                      e.currentTarget.style.color = "#ff6b35";
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.backgroundColor = "transparent";
-                      e.currentTarget.style.color = "#4a4a4a";
-                    }}
+                    className="block w-full px-4 py-2 text-gray-700 hover:text-orange-500 hover:bg-gray-100 text-left"
                   >
                     Sign Up
                   </Link>
@@ -325,6 +184,6 @@ export default function Navbar() {
           )}
         </li>
       </ul>
-    </div>
+    </nav>
   );
 }
