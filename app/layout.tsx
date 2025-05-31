@@ -2,7 +2,7 @@
 import Layout from "../components/Layout";
 import { ReactNode } from "react";
 import { Toaster } from "react-hot-toast";
-import "./globals.css";
+import "./global.css";
 
 export const metadata = {
   title: "Hikejam",
