@@ -16,11 +16,5 @@
     "files": [
       "static/chunks/_pages-dir-browser_node_modules_next_dist_pages__error_js.js"
     ]
-  },
-  "pages\\destinations\\Destination.tsx -> react-leaflet": {
-    "id": "pages\\destinations\\Destination.tsx -> react-leaflet",
-    "files": [
-      "static/chunks/_pages-dir-browser_node_modules_react-leaflet_lib_index_js.js"
-    ]
   }
 }
