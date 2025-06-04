@@ -1,22 +1,31 @@
-"use client"; 
+"use client";
 
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import AdminDashboard from "./AdminDashboard";
-import { useAuth } from "./auth"; 
+import { useAuth } from "../../components/auth-provider";
+import LoadingSpinner from "../../components/loading-spinner";
 
 export default function AdminDashboardPage() {
   const router = useRouter();
   const { user, loading } = useAuth();
 
   useEffect(() => {
-    if (!loading && (!user || user.role !== "admin")) {
-      router.replace("/login"); // redirect if not admin
+    if (!loading) {
+      if (!user) {
+        router.replace("/login");
+      } else if (user.role !== "admin") {
+        router.replace("/user/dashboard");
+      }
     }
   }, [user, loading, router]);
 
-  if (loading || !user || user.role !== "admin") {
-    return <p>Loading...</p>; // or a spinner
+  if (loading) {
+    return <LoadingSpinner />;
+  }
+
+  if (!user || user.role !== "admin") {
+    return <LoadingSpinner />;
   }
 
   return <AdminDashboard />;

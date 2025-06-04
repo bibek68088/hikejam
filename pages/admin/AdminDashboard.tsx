@@ -14,6 +14,7 @@ import {
   Search,
   ChevronDown,
   ChevronUp,
+  LogOut,
 } from "lucide-react";
 import {
   LineChart,
@@ -24,8 +25,8 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
-import BlogManagement from "./components/blog-management/BlogManagement";
-import DestinationManagement from "./components/DestinationManagement/DestinationManagement";
+import { logout } from "../../lib/auth";
+import { useRouter } from "next/navigation";
 
 const visitorData = [
   { name: "Jan", value: 400 },
@@ -36,14 +37,37 @@ const visitorData = [
   { name: "Jun", value: 700 },
 ];
 
+const BlogManagement = () => (
+  <div className="bg-white p-6 rounded-lg shadow-sm">
+    <h2 className="text-xl font-semibold mb-4">Blog Management</h2>
+    <p className="text-gray-600">Blog management interface would go here...</p>
+  </div>
+);
+
+const DestinationManagement = () => (
+  <div className="bg-white p-6 rounded-lg shadow-sm">
+    <h2 className="text-xl font-semibold mb-4">Destination Management</h2>
+    <p className="text-gray-600">
+      Destination management interface would go here...
+    </p>
+  </div>
+);
+
 const AdminDashboard = () => {
   const [isSidebarCollapsed, setSidebarCollapsed] = useState(false);
   const [activeTab, setActiveTab] = useState("dashboard");
+  const [showNotifications, setShowNotifications] = useState(false);
   const [notifications] = useState([
     { id: 1, text: "New user registration", time: "5 min ago" },
     { id: 2, text: "Server update completed", time: "1 hour ago" },
     { id: 3, text: "Database backup", time: "3 hours ago" },
   ]);
+  const router = useRouter();
+
+  const handleLogout = () => {
+    logout();
+    router.push("/");
+  };
 
   const stats = [
     { title: "Total Users", value: "1,234", icon: Users, change: "+12%" },
@@ -52,132 +76,29 @@ const AdminDashboard = () => {
     { title: "Messages", value: "89", icon: MessageSquare, change: "+15%" },
   ];
 
-  const containerStyle: React.CSSProperties = {
-    display: "flex",
-    minHeight: "100vh",
-    backgroundColor: "#f8f9fa",
-  };
-
-  const sidebarStyle: React.CSSProperties = {
-    width: isSidebarCollapsed ? "80px" : "250px",
-    backgroundColor: "#fff",
-    boxShadow: "2px 0 5px rgba(0, 0, 0, 0.1)",
-    transition: "width 0.3s ease",
-    padding: "1rem",
-  };
-
-  const headerStyle: React.CSSProperties = {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "space-between",
-    paddingBottom: "1rem",
-    borderBottom: "1px solid #eee",
-  };
-
-  const navItemStyle = (isActive: boolean): React.CSSProperties => ({
-    display: "flex",
-    alignItems: "center",
-    gap: "0.75rem",
-    padding: "0.75rem",
-    width: "100%",
-    border: "none",
-    background: "none",
-    cursor: "pointer",
-    color: isActive ? "#4f46e5" : "#666",
-    transition: "all 0.2s ease",
-    borderRadius: "0.5rem",
-    backgroundColor: isActive ? "#e0e7ff" : "transparent",
-  });
-
-  const mainContentStyle: React.CSSProperties = {
-    flex: 1,
-    padding: "2rem",
-    overflowY: "auto",
-  };
-
-  const topBarStyle: React.CSSProperties = {
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    marginBottom: "2rem",
-  };
-
-  const searchBarStyle: React.CSSProperties = {
-    display: "flex",
-    alignItems: "center",
-    gap: "0.5rem",
-    backgroundColor: "#fff",
-    padding: "0.5rem 1rem",
-    borderRadius: "0.5rem",
-    boxShadow: "0 2px 4px rgba(0, 0, 0, 0.05)",
-  };
-
-  const notificationBadgeStyle: React.CSSProperties = {
-    position: "absolute",
-    top: "-8px",
-    right: "-8px",
-    backgroundColor: "#ef4444",
-    color: "white",
-    fontSize: "0.75rem",
-    padding: "0.25rem 0.5rem",
-    borderRadius: "999px",
-  };
-
-  const dropdownStyle: React.CSSProperties = {
-    position: "absolute",
-    top: "100%",
-    right: 0,
-    width: "300px",
-    backgroundColor: "#fff",
-    borderRadius: "0.5rem",
-    boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
-    padding: "1rem",
-  };
-
-  const statsGridStyle: React.CSSProperties = {
-    display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
-    gap: "1.5rem",
-    marginBottom: "2rem",
-  };
-
-  const cardStyle: React.CSSProperties = {
-    backgroundColor: "#fff",
-    padding: "1.5rem",
-    borderRadius: "0.5rem",
-    boxShadow: "0 2px 4px rgba(0, 0, 0, 0.05)",
-    display: "flex",
-    alignItems: "center",
-    gap: "1rem",
-  };
-
-  const iconStyle: React.CSSProperties = {
-    padding: "1rem",
-    backgroundColor: "#e0e7ff",
-    borderRadius: "0.5rem",
-    color: "#4f46e5",
-  };
-
-  const chartContainerStyle: React.CSSProperties = {
-    backgroundColor: "#fff",
-    padding: "1.5rem",
-    borderRadius: "0.5rem",
-    boxShadow: "0 2px 4px rgba(0, 0, 0, 0.05)",
-  };
+  const navigationItems = [
+    { id: "dashboard", label: "Dashboard", icon: BarChart2 },
+    { id: "users", label: "Users", icon: Users },
+    { id: "bookings", label: "Bookings", icon: Package },
+    { id: "destinations", label: "Destinations", icon: Map },
+    { id: "blogs", label: "Blogs", icon: Cat },
+    { id: "settings", label: "Settings", icon: Settings },
+  ];
 
   return (
-    <div style={containerStyle}>
-      <div style={sidebarStyle}>
-        <div style={headerStyle}>
-          {!isSidebarCollapsed && <h2>HikeJam Admin</h2>}
+    <div className="flex min-h-screen bg-gray-50">
+      <div
+        className={`bg-white shadow-lg transition-all duration-300 ease-in-out p-4 ${
+          isSidebarCollapsed ? "w-20" : "w-64"
+        }`}
+      >
+        <div className="flex items-center justify-between pb-4 border-b border-gray-200">
+          {!isSidebarCollapsed && (
+            <h2 className="text-xl font-bold text-gray-800">HikeJam Admin</h2>
+          )}
           <button
             onClick={() => setSidebarCollapsed(!isSidebarCollapsed)}
-            style={{
-              background: "none",
-              border: "none",
-              color: "#666",
-              cursor: "pointer",
-            }}
+            className="text-gray-600 hover:text-gray-800 transition-colors"
           >
             {isSidebarCollapsed ? (
               <ChevronDown size={20} />
@@ -187,86 +108,102 @@ const AdminDashboard = () => {
           </button>
         </div>
 
-        <nav style={{ marginTop: "1rem" }}>
-          {[
-            { id: "dashboard", label: "Dashboard", icon: BarChart2 },
-            { id: "users", label: "Users", icon: Users },
-            { id: "bookings", label: "Bookings", icon: Package },
-            { id: "destinations", label: "Destinations", icon: Map },
-            { id: "blogs", label: "Blogs", icon: Cat },
-            { id: "settings", label: "Settings", icon: Settings },
-          ].map(({ id, label, icon: Icon }) => (
+        <nav className="mt-4 space-y-1">
+          {navigationItems.map(({ id, label, icon: Icon }) => (
             <button
               key={id}
-              style={navItemStyle(activeTab === id)}
               onClick={() => setActiveTab(id)}
+              className={`flex items-center w-full px-3 py-3 text-left rounded-lg transition-all duration-200 ${
+                activeTab === id
+                  ? "bg-indigo-100 text-indigo-700"
+                  : "text-gray-600 hover:bg-gray-100 hover:text-gray-900"
+              } ${isSidebarCollapsed ? "justify-center" : "gap-3"}`}
             >
               <Icon size={20} />
-              {!isSidebarCollapsed && <span>{label}</span>}
+              {!isSidebarCollapsed && (
+                <span className="font-medium">{label}</span>
+              )}
             </button>
           ))}
         </nav>
+
+        <button
+          className={`flex items-center w-full px-3 py-3 mt-auto text-left rounded-lg transition-all duration-200 text-red-600 hover:bg-red-50 ${
+            isSidebarCollapsed ? "justify-center" : "gap-3"
+          }`}
+          onClick={handleLogout}
+        >
+          <LogOut size={20} />
+          {!isSidebarCollapsed && <span className="font-medium">Logout</span>}
+        </button>
       </div>
 
-      <div style={mainContentStyle}>
-        <div style={topBarStyle}>
-          <div style={searchBarStyle}>
-            <Search size={20} />
+      <div className="flex-1 p-8 overflow-y-auto">
+        <div className="flex items-center justify-between mb-8">
+          <div className="flex items-center gap-2 bg-white px-4 py-2 rounded-lg shadow-sm">
+            <Search size={20} className="text-gray-400" />
             <input
               type="text"
               placeholder="Search..."
-              style={{
-                border: "none",
-                outline: "none",
-                fontSize: "0.9rem",
-                width: "200px",
-              }}
+              className="border-none outline-none text-sm w-48"
             />
           </div>
 
-          <div style={{ position: "relative", cursor: "pointer" }}>
-            <Bell size={20} />
-            <div style={notificationBadgeStyle}>{notifications.length}</div>
-            <div style={dropdownStyle}>
-              {notifications.map((n) => (
-                <div
-                  key={n.id}
-                  style={{ padding: "0.75rem", borderBottom: "1px solid #eee" }}
-                >
-                  <p style={{ margin: 0, fontSize: "0.9rem" }}>{n.text}</p>
-                  <span style={{ fontSize: "0.8rem", color: "#666" }}>
-                    {n.time}
-                  </span>
+          <div className="relative">
+            <button
+              onClick={() => setShowNotifications(!showNotifications)}
+              className="relative p-2 text-gray-600 hover:text-gray-800 transition-colors"
+            >
+              <Bell size={20} />
+              <div className="absolute -top-2 -right-2 bg-red-500 text-white text-xs px-2 py-1 rounded-full">
+                {notifications.length}
+              </div>
+            </button>
+
+            {showNotifications && (
+              <div className="absolute top-full right-0 mt-2 w-80 bg-white rounded-lg shadow-lg border border-gray-200 z-50">
+                <div className="p-4">
+                  <h3 className="font-semibold text-gray-900 mb-3">
+                    Notifications
+                  </h3>
+                  {notifications.map((notification) => (
+                    <div
+                      key={notification.id}
+                      className="py-3 border-b border-gray-100 last:border-b-0"
+                    >
+                      <p className="text-sm text-gray-900 mb-1">
+                        {notification.text}
+                      </p>
+                      <span className="text-xs text-gray-500">
+                        {notification.time}
+                      </span>
+                    </div>
+                  ))}
                 </div>
-              ))}
-            </div>
+              </div>
+            )}
           </div>
         </div>
 
         {activeTab === "dashboard" && (
           <>
-            <div style={statsGridStyle}>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
               {stats.map((stat, idx) => (
-                <div key={idx} style={cardStyle}>
-                  <div style={iconStyle}>
-                    <stat.icon size={24} />
+                <div
+                  key={idx}
+                  className="bg-white p-6 rounded-lg shadow-sm flex items-center gap-4"
+                >
+                  <div className="p-4 bg-indigo-100 rounded-lg">
+                    <stat.icon size={24} className="text-indigo-700" />
                   </div>
                   <div>
-                    <h3
-                      style={{ margin: 0, fontSize: "0.9rem", color: "#666" }}
-                    >
+                    <h3 className="text-sm font-medium text-gray-600 mb-1">
                       {stat.title}
                     </h3>
-                    <p
-                      style={{
-                        margin: "0.25rem 0",
-                        fontSize: "1.5rem",
-                        fontWeight: "bold",
-                      }}
-                    >
+                    <p className="text-2xl font-bold text-gray-900 mb-1">
                       {stat.value}
                     </p>
-                    <p style={{ fontSize: "0.8rem", color: "#22c55e" }}>
+                    <p className="text-sm text-green-600 font-medium">
                       {stat.change}
                     </p>
                   </div>
@@ -274,26 +211,69 @@ const AdminDashboard = () => {
               ))}
             </div>
 
-            <div style={chartContainerStyle}>
-              <h3 style={{ marginBottom: "1.5rem", fontSize: "1.25rem" }}>
+            <div className="bg-white p-6 rounded-lg shadow-sm">
+              <h3 className="text-xl font-semibold text-gray-900 mb-6">
                 Visitor Overview
               </h3>
-              <ResponsiveContainer width="100%" height={300}>
-                <LineChart data={visitorData}>
-                  <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis dataKey="name" />
-                  <YAxis />
-                  <Tooltip />
-                  <Line type="monotone" dataKey="value" stroke="#4f46e5" />
-                </LineChart>
-              </ResponsiveContainer>
+              <div className="h-80">
+                <ResponsiveContainer width="100%" height="100%">
+                  <LineChart data={visitorData}>
+                    <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" />
+                    <XAxis
+                      dataKey="name"
+                      axisLine={false}
+                      tickLine={false}
+                      className="text-gray-600"
+                    />
+                    <YAxis
+                      axisLine={false}
+                      tickLine={false}
+                      className="text-gray-600"
+                    />
+                    <Tooltip
+                      contentStyle={{
+                        backgroundColor: "#fff",
+                        border: "1px solid #e2e8f0",
+                        borderRadius: "8px",
+                        boxShadow: "0 4px 6px -1px rgba(0, 0, 0, 0.1)",
+                      }}
+                    />
+                    <Line
+                      type="monotone"
+                      dataKey="value"
+                      stroke="#4f46e5"
+                      strokeWidth={3}
+                      dot={{ fill: "#4f46e5", strokeWidth: 2, r: 4 }}
+                      activeDot={{ r: 6, stroke: "#4f46e5", strokeWidth: 2 }}
+                    />
+                  </LineChart>
+                </ResponsiveContainer>
+              </div>
             </div>
           </>
         )}
 
         {activeTab === "blogs" && <BlogManagement />}
         {activeTab === "destinations" && <DestinationManagement />}
+
+        {!["dashboard", "blogs", "destinations"].includes(activeTab) && (
+          <div className="bg-white p-6 rounded-lg shadow-sm">
+            <h2 className="text-xl font-semibold mb-4 capitalize">
+              {activeTab} Management
+            </h2>
+            <p className="text-gray-600">
+              {activeTab} management interface would go here...
+            </p>
+          </div>
+        )}
       </div>
+
+      {showNotifications && (
+        <div
+          className="fixed inset-0 z-40 bg-black bg-opacity-25 lg:hidden"
+          onClick={() => setShowNotifications(false)}
+        />
+      )}
     </div>
   );
 };

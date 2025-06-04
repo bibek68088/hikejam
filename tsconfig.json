@@ -34,10 +34,10 @@
     "./next-env.d.ts",
     "./src",
     "app",
-    "components/Footer",
+    "app/Footer",
     "pages",
     ".next/types/**/*.ts"
-, "components/Users", "components/Layout.tsx", "components/Navbar"  ],
+, "pages/users", "components/Layout.tsx", "components/Navbar"  ],
   "exclude": [
     "./node_modules"
   ]
