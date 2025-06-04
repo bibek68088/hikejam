@@ -5,6 +5,7 @@ import { GetStaticPaths, GetStaticProps } from "next";
 import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
 import blogData from "../../public/blogPosts.json";
+import ContactPage from "../contact";
 
 interface BlogPost {
   id: number;
@@ -63,7 +64,6 @@ const BlogPostPage: React.FC<BlogPostPageProps> = ({ post }) => {
 
   return (
     <div className="flex flex-col min-h-screen w-full bg-gradient-to-br from-white to-gray-50">
-      <Navbar />
       <div className="flex-1 px-4 py-8">
         <article className="max-w-3xl mx-auto bg-white rounded-xl shadow-lg p-8 border border-orange-100">
           <h1 className="text-4xl font-extrabold text-gray-900 mb-4">{post.title}</h1>
@@ -101,6 +101,8 @@ const BlogPostPage: React.FC<BlogPostPageProps> = ({ post }) => {
           </div>
         </article>
       </div>
+      <ContactPage/>
+   
       <Footer />
     </div>
   );
