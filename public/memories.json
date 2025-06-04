@@ -1,0 +1,44 @@
+[
+  {
+    "id": 1,
+    "image": "/champadevi.jpg",
+    "caption": "ChampaDevi Hiking Trial, 2024",
+    "location": "Nepal",
+    "trail": "HattiBan Trails"
+  },
+  {
+    "id": 2,
+    "image": "/bagdwar.jpg",
+    "caption": "Bagdwar Hiking Trial",
+    "location": "Nagarjuna Region",
+    "trail": "Nagarjuna National Park"
+  },
+  {
+    "id": 3,
+    "image": "/kot-dada.jpeg",
+    "caption": "Kot Dada, Lalitpur",
+    "location": "Lalitpur",
+    "trail": ""
+  },
+    {
+    "id": 4,
+    "image": "/team.jpg",
+    "caption": "Bhasmeshwor Dada, Chandagiri",
+    "location": "Chandagiri",
+    "trail": "Chandagiri Hiking Trials"
+  },
+    {
+    "id": 5,
+    "image": "/shivapuri.jpg",
+    "caption": "Shivapuri, Budanilkhanta",
+    "location": "Budanilkhanta",
+    "trail": ""
+  },
+    {
+    "id": 6,
+    "image": "/img.jpg",
+    "caption": "Sikles, Pokhara",
+    "location": "Pokhara",
+    "trail": "Kapuche Treking Trials"
+  }
+]

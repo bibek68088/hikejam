@@ -1,166 +1,66 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
+import Image from "next/image";
+import Link from "next/link";
+import MemoryCarousel from "../../components/MemoryCarousel";
+import logo from "../../public/logo.jpg";
 
-const LandingPage = () => {
-  const [isMobile, setIsMobile] = useState(false);
-  const [isSmallMobile, setIsSmallMobile] = useState(false);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth <= 768);
-      setIsSmallMobile(window.innerWidth <= 480);
-    };
-
-    handleResize();
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
-  const keyframes = `
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes slideIn {
-      from { opacity: 0; transform: translateY(-20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes glow {
-      0% { box-shadow: 0 0 10px rgba(255, 87, 51, 0.5); }
-      50% { box-shadow: 0 0 20px rgba(255, 87, 51, 0.8); }
-      100% { box-shadow: 0 0 10px rgba(255, 87, 51, 0.5); }
-    }
-
-    @keyframes scrollBounce {
-      0% { transform: translateY(0); }
-      50% { transform: translateY(10px); }
-      100% { transform: translateY(0); }
-    }
-  `;
-
-  // Styles
-  const landingPageStyle = {
-    width: "100%",
-    height: "100vh",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    position: "relative" as const,
-    overflow: "hidden",
-  };
-
-  const backgroundVideoStyle = {
-    position: "absolute" as const,
-    top: 0,
-    left: 0,
-    width: "100%",
-    height: "100vh",
-    objectFit: "cover" as const,
-    zIndex: -1,
-  };
-
-  const heroOverlayStyle = {
-    position: "relative" as const,
-    zIndex: 2,
-    padding: "3rem",
-    textAlign: "center" as const,
-    color: "white",
-  };
-
-  const h1Style = {
-    fontSize: isSmallMobile ? "2rem" : isMobile ? "2.5rem" : "3.5rem",
-    fontWeight: "bold",
-    marginBottom: "15px",
-    opacity: 0,
-    animation: "slideIn 1s ease-in-out forwards 0.5s",
-    textShadow: "2px 2px 6px rgba(0, 0, 0, 0.7)",
-    margin: "0 0 15px 0",
-  };
-
-  const pStyle = {
-    fontSize: isSmallMobile ? "1rem" : isMobile ? "1.2rem" : "1.4rem",
-    marginBottom: "20px",
-    opacity: 0,
-    animation: "fadeIn 1s ease-in-out forwards 0.8s",
-    textShadow: "1px 1px 5px rgba(0, 0, 0, 0.7)",
-    margin: "0 0 20px 0",
-  };
-
-  const ctaButtonStyle = {
-    background: "linear-gradient(45deg, #ff5733, #ff7849)",
-    color: "white",
-    padding: isSmallMobile ? "10px 20px" : isMobile ? "12px 24px" : "14px 28px",
-    fontSize: isSmallMobile ? "1rem" : isMobile ? "1.1rem" : "1.3rem",
-    border: "none",
-    borderRadius: "50px",
-    cursor: "pointer",
-    transition: "transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out",
-    position: "relative" as const,
-    overflow: "hidden",
-    animation: "glow 2s infinite",
-  };
-
-  const scrollIndicatorStyle = {
-    position: "absolute" as const,
-    bottom: "20px",
-    left: "50%",
-    transform: "translateX(-50%)",
-    width: "30px",
-    height: "50px",
-    border: "2px solid white",
-    borderRadius: "25px",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    zIndex: 3,
-  };
-
-  const scrollIndicatorBeforeStyle = {
-    width: "10px",
-    height: "10px",
-    background: "white",
-    borderRadius: "50%",
-    animation: "scrollBounce 1.5s infinite",
-  };
-
-  const handleButtonHover = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.currentTarget.style.transform = "scale(1.1)";
-    e.currentTarget.style.boxShadow = "0 10px 20px rgba(255, 87, 51, 0.5)";
-  };
-
-  const handleButtonLeave = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.currentTarget.style.transform = "scale(1)";
-    e.currentTarget.style.boxShadow = "0 0 10px rgba(255, 87, 51, 0.5)";
-  };
-
+const LandingPage: React.FC = () => {
   return (
-    <>
-      <style jsx>{keyframes}</style>
-
-      <div style={landingPageStyle}>
-        <video autoPlay muted loop playsInline style={backgroundVideoStyle}>
-          <source src="/video.mp4" type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
-
-        <div style={heroOverlayStyle}>
-          <h1 style={h1Style}>🌍 Embark on Your Next Adventure</h1>
-          <p style={pStyle}>Where the journey begins, and memories are made.</p>
-          <button
-            style={ctaButtonStyle}
-            onMouseEnter={handleButtonHover}
-            onMouseLeave={handleButtonLeave}
-          >
-            Let's Explore
-          </button>
+    <div className="flex flex-col md:flex-row min-h-screen w-full bg-gradient-to-br from-white to-gray-50">
+      {/* LEFT */}
+      <div className="relative w-full md:w-1/2 flex items-center justify-center px-8 py-16 overflow-hidden">
+        {/* Background Logo */}
+        <div className="absolute inset-0 z-0 opacity-10 blur-sm">
+          <Image
+            src={logo}
+            alt="HikeJam Logo"
+            layout="fill"
+            objectFit="contain"
+            priority
+          />
         </div>
 
-        <div style={scrollIndicatorStyle}>
-          <div style={scrollIndicatorBeforeStyle}></div>
+        {/* Content */}
+        <div className="relative z-10 text-left max-w-2xl space-y-6">
+          <h1 className="text-4xl md:text-6xl font-extrabold text-gray-900 leading-tight tracking-tight">
+            <span className="block">Your Trail.</span>
+            <span className="block text-orange-500">Your Story.</span>
+            <span className="block">Our Journey Together.</span>
+          </h1>
+          <p className="text-lg md:text-xl text-gray-700 leading-relaxed">
+            At <strong>HikeJam</strong>, we believe every hike holds a story worth sharing — a sunrise conquered, a trail discovered, a bond formed. Share your journey, relive your memories, and inspire the next hiker.
+          </p>
+          <Link href="/blog">
+            <button className="bg-orange-500 hover:bg-orange-600 text-white px-8 py-4 rounded-full shadow-lg hover:scale-105 transition-transform duration-300 font-semibold text-lg">
+              Share Your Story
+            </button>
+          </Link>
         </div>
       </div>
-    </>
+
+      {/* RIGHT */}
+      <div className="hidden md:flex md:w-1/2 min-h-screen items-center justify-center px-8 py-16 bg-white">
+        <div className="flex flex-col items-center w-full max-w-xl border-l border-orange-100 shadow-2xl rounded-3xl p-6 bg-gradient-to-tr from-orange-50 to-white backdrop-blur-xl">
+          <div className="w-full mb-6 text-center">
+            <h2 className="text-3xl font-extrabold text-gray-800 mb-2 tracking-tight">
+               Wall of Memories
+            </h2>
+            <p className="text-sm text-gray-600 italic">
+              A snapshot of the trails shared by people.
+            
+            </p>
+          </div>
+
+          <div className="w-full">
+            <MemoryCarousel />
+          </div>
+
+          <p className="text-xs text-gray-500 italic mt-6">
+            Data from <code>/memories.json</code>
+          </p>
+        </div>
+      </div>
+    </div>
   );
 };
 

@@ -45,7 +45,7 @@ const hikingDestinations: HikingDestination[] = [
     duration: "4-5 hours",
     trailhead: "Budhanilkantha Temple",
     trailheadLocation: { lat: 27.7835, lng: 85.3632 },
-    image: "/assets/shivapuri.jpg",
+    image: "/shivapuri.jpg",
     reviews: [
       { user: "John", rating: 5, comment: "Amazing hike!" },
       { user: "Sara", rating: 4, comment: "Good, but challenging." },
@@ -61,7 +61,7 @@ const hikingDestinations: HikingDestination[] = [
     trailheadLocation: { lat: 27.6269, lng: 85.2755 },
     duration: "5-6 hours",
     trailhead: "Pharping",
-    image: "/assets/shivapuri.jpg",
+    image: "/shivapuri.jpg",
     reviews: [
       { user: "John", rating: 5, comment: "Amazing hike!" },
       { user: "Sara", rating: 4, comment: "Good, but challenging." },
@@ -77,7 +77,7 @@ const hikingDestinations: HikingDestination[] = [
     trailheadLocation: { lat: 27.7259, lng: 85.5211 },
     duration: "3-4 hours",
     trailhead: "Nagarkot Tower",
-    image: "/assets/shivapuri.jpg",
+    image: "/shivapuri.jpg",
     reviews: [
       { user: "John", rating: 5, comment: "Amazing hike!" },
       { user: "Sara", rating: 4, comment: "Good, but challenging." },
@@ -93,7 +93,7 @@ const hikingDestinations: HikingDestination[] = [
     trailheadLocation: { lat: 27.5764, lng: 85.4068 },
     duration: "6-7 hours",
     trailhead: "Godavari Botanical Garden",
-    image: "/assets/shivapuri.jpg",
+    image: "/shivapuri.jpg",
     reviews: [
       { user: "John", rating: 5, comment: "Amazing hike!" },
       { user: "Sara", rating: 4, comment: "Good, but challenging." },
@@ -109,7 +109,7 @@ const hikingDestinations: HikingDestination[] = [
     trailheadLocation: { lat: 27.7783, lng: 85.3922 },
     duration: "5-6 hours",
     trailhead: "Sundarijal",
-    image: "/assets/shivapuri.jpg",
+    image: "/shivapuri.jpg",
     reviews: [
       { user: "John", rating: 5, comment: "Amazing hike!" },
       { user: "Sara", rating: 4, comment: "Good, but challenging." },
@@ -125,7 +125,7 @@ const hikingDestinations: HikingDestination[] = [
     trailheadLocation: { lat: 28.1172, lng: 85.2795 },
     duration: "7-9 hours",
     trailhead: "Dhunche",
-    image: "/assets/shivapuri.jpg",
+    image: "/shivapuri.jpg",
     reviews: [
       { user: "John", rating: 5, comment: "Amazing hike!" },
       { user: "Sara", rating: 4, comment: "Good, but challenging." },
@@ -141,7 +141,7 @@ const hikingDestinations: HikingDestination[] = [
     trailheadLocation: { lat: 27.6943, lng: 85.5066 },
     duration: "2-3 hours",
     trailhead: "Nagarkot",
-    image: "/assets/shivapuri.jpg",
+    image: "/shivapuri.jpg",
     reviews: [
       { user: "John", rating: 5, comment: "Amazing hike!" },
       { user: "Sara", rating: 4, comment: "Good, but challenging." },
@@ -157,7 +157,7 @@ const hikingDestinations: HikingDestination[] = [
     duration: "4-5 hours",
     trailheadLocation: { lat: 27.58, lng: 85.4063 },
     trailhead: "Panauti",
-    image: "/assets/shivapuri.jpg",
+    image: "/shivapuri.jpg",
     reviews: [
       { user: "John", rating: 5, comment: "Amazing hike!" },
       { user: "Sara", rating: 4, comment: "Good, but challenging." },
@@ -173,7 +173,7 @@ const hikingDestinations: HikingDestination[] = [
     trailheadLocation: { lat: 27.9501, lng: 85.2394 },
     duration: "3-4 hours",
     trailhead: "Kakani",
-    image: "/assets/shivapuri.jpg",
+    image: "/shivapuri.jpg",
     reviews: [
       { user: "John", rating: 5, comment: "Amazing hike!" },
       { user: "Sara", rating: 4, comment: "Accepted." },
@@ -189,7 +189,7 @@ const hikingDestinations: HikingDestination[] = [
     trailheadLocation: { lat: 27.7783, lng: 85.3922 },
     duration: "5-6 hours",
     trailhead: "Sundarijal",
-    image: "/assets/shivapuri.jpg",
+    image: "/shivapuri.jpg",
     reviews: [
       { user: "John", rating: 5, comment: "Amazing hike!" },
       { user: "Sara", rating: 4, comment: "Good, but challenging." },

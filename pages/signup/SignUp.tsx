@@ -1,10 +1,12 @@
 "use client";
 
+import type React from "react";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { User, Mail, Phone, MapPin, Lock, Eye, EyeOff } from "lucide-react";
 import { toast, Toaster } from "react-hot-toast";
 import Image from "next/image";
+import { useAuth } from "../../components/auth-provider";
 import workspaceImg from "../../public/p2.jpg";
 
 type FormData = {
@@ -23,7 +25,10 @@ type Errors = {
   [K in keyof FormData]?: string;
 };
 
-const Signup = () => {
+export default function Signup() {
+  const { login } = useAuth();
+  const router = useRouter();
+
   const [formData, setFormData] = useState<FormData>({
     fullName: "",
     email: "",
@@ -43,7 +48,7 @@ const Signup = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [errors, setErrors] = useState<Errors>({});
   const [isMobile, setIsMobile] = useState(false);
-  const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const checkIsMobile = () => {
@@ -111,8 +116,9 @@ const Signup = () => {
     return !error;
   };
 
-  const handleSignup = (e: React.FormEvent) => {
+  const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault();
+    setIsLoading(true);
 
     const allTouched: TouchedFields = {
       fullName: true,
@@ -128,155 +134,44 @@ const Signup = () => {
     );
 
     if (isValid) {
-      toast.success("Account created successfully!", {
-        duration: 3000,
-        position: "top-center",
-      });
+      try {
+        await new Promise((res) => setTimeout(res, 1000));
 
-      setTimeout(() => {
-        router.push("/login");
-      }, 3000);
+        const userData = {
+          email: formData.email,
+          name: formData.fullName,
+        };
+
+        login("user", userData);
+
+        toast.success(
+          "Account created successfully! Redirecting to dashboard...",
+          {
+            duration: 2000,
+            position: "top-center",
+          }
+        );
+
+        setTimeout(() => {
+          router.push("/user/dashboard");
+        }, 1000);
+      } catch (error) {
+        toast.error("Signup failed. Please try again.", {
+          duration: 3000,
+          position: "top-center",
+        });
+      } finally {
+        setIsLoading(false);
+      }
+    } else {
+      setIsLoading(false);
     }
-  };
-
-  // Inline styles
-  const authContainerStyle = {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    minHeight: "100vh",
-    backgroundColor: "white",
-    padding: "20px",
-    position: "relative" as const,
-    overflow: "hidden",
-  };
-
-  const authCardStyle = {
-    background: "white",
-    borderRadius: "20px",
-    boxShadow: "0 10px 30px rgba(0, 0, 0, 0.6)",
-    width: "100%",
-    maxWidth: "1000px",
-    display: "flex",
-    overflow: "hidden",
-    flexDirection: isMobile ? ("column" as const) : ("row" as const),
-  };
-
-  const authIllustrationStyle = {
-    flex: 1,
-    backgroundColor: "#ffffff",
-    padding: isMobile ? "20px" : "40px",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-  };
-
-  const workspaceImageStyle = {
-    width: "100%",
-    maxWidth: isMobile ? "300px" : "400px",
-    height: "auto",
-  };
-
-  const authFormStyle = {
-    flex: 1,
-    padding: isMobile ? "20px" : "40px",
-    backgroundColor: "#ffffff",
-  };
-
-  const authFormH2Style = {
-    color: "#4d43dc",
-    fontSize: "24px",
-    marginBottom: "18px",
-    textAlign: "center" as const,
-  };
-
-  const authSubtitleStyle = {
-    color: "#666",
-    fontSize: "16px",
-    textAlign: "justify" as const,
-    marginBottom: "30px",
-  };
-
-  const formGroupStyle = {
-    marginBottom: "20px",
-  };
-
-  const inputIconWrapperStyle = {
-    position: "relative" as const,
-    display: "flex",
-    alignItems: "center",
-  };
-
-  const inputIconStyle = {
-    position: "absolute" as const,
-    left: "12px",
-    color: "#666",
-    transition: "color 0.3s ease",
-  };
-
-  const inputStyle = (hasError: boolean) => ({
-    width: "100%",
-    padding: "12px 15px 12px 40px",
-    border: hasError ? "1px solid #ff4d4f" : "1px solid #ddd",
-    borderRadius: "8px",
-    fontSize: "14px",
-    transition: "all 0.3s ease",
-    backgroundColor: hasError ? "#fff1f0" : "white",
-    outline: "none",
-  });
-
-  const passwordToggleStyle = {
-    position: "absolute" as const,
-    right: "12px",
-    background: "none",
-    border: "none",
-    cursor: "pointer",
-    padding: "0",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    color: "#666",
-    transition: "color 0.3s ease",
-  };
-
-  const errorMessageStyle = {
-    color: "#ff4d4f",
-    fontSize: "12px",
-    marginTop: "4px",
-    marginLeft: "4px",
-    animation: "fadeIn 0.3s ease",
-  };
-
-  const authButtonStyle = {
-    width: "100%",
-    padding: "12px",
-    backgroundColor: "#3e40c0",
-    color: "white",
-    border: "none",
-    borderRadius: "25px",
-    fontSize: "16px",
-    cursor: "pointer",
-    margin: "20px 0",
-    transition: "background-color 0.3s ease",
-  };
-
-  const authFooterStyle = {
-    textAlign: "center" as const,
-    marginTop: "20px",
-    color: "#666",
-    fontSize: "14px",
-  };
-
-  const authFooterLinkStyle = {
-    color: "#ff4aa2",
-    textDecoration: "none",
-    fontWeight: 500,
   };
 
   const renderInput = (
     name: keyof FormData,
     IconComponent: React.ElementType,
-    type: string = "text",
+    type = "text",
     placeholder: string
   ) => {
     const isPassword = type === "password";
@@ -284,115 +179,131 @@ const Signup = () => {
     const hasError = touched[name] && errors[name];
 
     return (
-      <div style={formGroupStyle}>
-        <div style={inputIconWrapperStyle}>
-          <IconComponent style={inputIconStyle} size={18} />
+      <div className="mb-5">
+        <div className="relative flex items-center">
+          <IconComponent
+            className="absolute left-3 text-gray-600 transition-colors duration-300"
+            size={18}
+          />
           <input
             type={inputType}
             name={name}
             placeholder={placeholder}
             value={formData[name]}
             onChange={handleChange}
-            style={{
-              ...inputStyle(!!hasError),
-              paddingRight: isPassword ? "40px" : "15px",
-            }}
-            onFocus={(e) => {
-              e.target.style.borderColor = "#3e40c0";
-              e.target.style.boxShadow = "0 0 0 2px rgba(62, 64, 192, 0.1)";
-            }}
-            onBlur={(e) => {
-              handleBlur(e);
-              if (!hasError) {
-                e.target.style.borderColor = "#ddd";
-                e.target.style.boxShadow = "none";
-              }
-            }}
+            disabled={isLoading}
+            onBlur={handleBlur}
+            className={`w-full py-3 px-4 pl-10 border rounded-lg text-sm transition-all duration-300 outline-none ${
+              isPassword ? "pr-10" : "pr-4"
+            } ${
+              hasError
+                ? "border-red-500 bg-red-50 focus:border-red-500 focus:ring-2 focus:ring-red-100"
+                : "border-gray-300 bg-white focus:border-indigo-600 focus:ring-2 focus:ring-indigo-100"
+            } ${isLoading ? "opacity-70 cursor-not-allowed" : "cursor-auto"}`}
           />
           {isPassword && (
             <button
               type="button"
-              style={passwordToggleStyle}
+              className="absolute right-3 bg-transparent border-none cursor-pointer p-0 flex items-center justify-center text-gray-600 transition-colors duration-300 hover:text-indigo-600 disabled:cursor-not-allowed"
               onClick={() => setShowPassword((prev) => !prev)}
+              disabled={isLoading}
               tabIndex={-1}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.color = "#3e40c0";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.color = "#666";
-              }}
             >
               {showPassword ? <Eye size={18} /> : <EyeOff size={18} />}
             </button>
           )}
         </div>
-        {hasError && <div style={errorMessageStyle}>{errors[name]}</div>}
+        {hasError && (
+          <div className="text-red-500 text-xs mt-1 ml-1 animate-fade-in">
+            {errors[name]}
+          </div>
+        )}
       </div>
     );
   };
 
   return (
-    <div style={authContainerStyle}>
+    <div className="flex items-center justify-center min-h-screen bg-white p-5 relative overflow-hidden">
       <Toaster />
-      <div style={authCardStyle}>
-        <div style={authIllustrationStyle}>
+      <div
+        className={`bg-white rounded-3xl shadow-2xl w-full max-w-4xl flex overflow-hidden ${
+          isMobile ? "flex-col" : "flex-row"
+        }`}
+      >
+        {/* Image Section */}
+        <div
+          className={`flex-1 bg-white flex items-center justify-center ${
+            isMobile ? "p-5" : "p-10"
+          }`}
+        >
           <Image
             src={workspaceImg}
             alt="Workspace"
-            style={workspaceImageStyle}
+            width={400}
+            height={400}
+            className={`w-full h-auto ${isMobile ? "max-w-xs" : "max-w-md"}`}
+            priority
           />
         </div>
-        <div style={authFormStyle}>
-          <h2 style={authFormH2Style}>Welcome to HikeJam!</h2>
-          <p style={authSubtitleStyle}>
+
+        {/* Form Section */}
+        <div className={`flex-1 bg-white ${isMobile ? "p-5" : "p-10"}`}>
+          <h2 className="text-indigo-600 text-2xl mb-5 text-center font-semibold">
+            Welcome to HikeJam!
+          </h2>
+          <p className="text-gray-600 text-base text-justify mb-8">
             Our platform is designed for hiking enthusiasts to explore
             breathtaking trails, share experiences, and connect with fellow
             adventurers.
           </p>
+
           <form onSubmit={handleSignup}>
             {renderInput("fullName", User, "text", "Full Name")}
             {renderInput("email", Mail, "email", "E-mail")}
             {renderInput("mobile", Phone, "tel", "Mobile Number")}
             {renderInput("address", MapPin, "text", "Address")}
             {renderInput("password", Lock, "password", "Password")}
+
             <button
               type="submit"
-              style={authButtonStyle}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = "#4161d4";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = "#3e40c0";
-              }}
-              onMouseDown={(e) => {
-                e.currentTarget.style.transform = "scale(0.98)";
-              }}
-              onMouseUp={(e) => {
-                e.currentTarget.style.transform = "scale(1)";
-              }}
+              disabled={isLoading}
+              className={`w-full py-3 px-4 text-white border-none rounded-full text-base my-5 transition-all duration-300 transform ${
+                isLoading
+                  ? "bg-indigo-300 cursor-not-allowed opacity-70"
+                  : "bg-indigo-700 hover:bg-indigo-800 hover:scale-[0.98] active:scale-95 cursor-pointer"
+              }`}
             >
-              Sign Up
+              {isLoading ? "Creating Account..." : "Sign Up"}
             </button>
           </form>
-          <p style={authFooterStyle}>
+
+          <p className="text-center mt-5 text-gray-600 text-sm">
             Already have an account?{" "}
             <a
               href="/login"
-              style={authFooterLinkStyle}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.textDecoration = "underline";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.textDecoration = "none";
-              }}
+              className="text-pink-500 no-underline font-medium hover:underline transition-all duration-200"
             >
               Login
             </a>
           </p>
         </div>
       </div>
+
+      <style jsx>{`
+        @keyframes fade-in {
+          from {
+            opacity: 0;
+            transform: translateY(-10px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        .animate-fade-in {
+          animation: fade-in 0.3s ease;
+        }
+      `}</style>
     </div>
   );
-};
-
-export default Signup;
+}

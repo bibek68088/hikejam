@@ -1,22 +1,23 @@
-// app/layout.tsx
-import Layout from "../components/Layout";
+// components/Layout.tsx
+import Navbar from "./Navbar";
+import Footer from "./Footer";
 import { ReactNode } from "react";
-import { Toaster } from "react-hot-toast";
+import "../app/global.css";
+// import type { Metadata } from "next";
 
-export const metadata = {
-  title: "Hikejam",
-  description: "Hikejam is a platform for sharing hiking experiences and tips.",
+// export const metadata: Metadata = {
+//   title: "Hikejam",
+//   description: "Hikejam is a platform for sharing hiking experiences and tips.",
+// };
+
+const Layout = ({ children }: { children: ReactNode }) => {
+  return (
+    <>
+      <Navbar />
+      {children}
+      <Footer />
+    </>
+  );
 };
 
-export default function RootLayout({ children }: { children: ReactNode }) {
-  return (
-    <html lang="en">
-      <body>
-        <Layout>
-          <Toaster position="top-center" reverseOrder={false} />
-          {children}
-        </Layout>
-      </body>
-    </html>
-  );
-}
+export default Layout;

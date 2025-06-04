@@ -1,11 +1,13 @@
 import LandingPage from "./landing-page";
-import FeaturedSection from "./feature-section";
+import AboutUs from "./about-us";
 
 export default function HomePage() {
   return (
     <>
       <LandingPage />
-      <FeaturedSection />
+      <AboutUs/>
+      
+      
     </>
   );
 }
