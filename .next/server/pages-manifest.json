@@ -2,7 +2,13 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
+<<<<<<< HEAD
   "/": "pages/index.js",
   "/signup": "pages/signup.js",
   "/login": "pages/login.js"
+=======
+  "/Blog": "pages/Blog.js",
+  "/Blog/[slug]": "pages/Blog/[slug].js",
+  "/": "pages/index.js"
+>>>>>>> f59f574b8e779aa84728cfded519b681008eb9e1
 }

@@ -1,10 +1,8 @@
-import type React from "react";
+// app/layout.tsx
+import Layout from "../components/Layout";
+import { ReactNode } from "react";
+import { Toaster } from "react-hot-toast";
 import "./global.css";
-// import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import Navbar from "./Navbar";
-
-const inter = Inter({ subsets: ["latin"] });
 
 // export const metadata: Metadata = {
 //   title: "HikeJam - Your Hiking Adventure",
