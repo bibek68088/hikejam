@@ -2,7 +2,5 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/Blog": "pages/Blog.js",
-  "/Blog/[slug]": "pages/Blog/[slug].js",
-  "/submit-blog": "pages/submit-blog.js"
+  "/": "pages/index.js"
 }
