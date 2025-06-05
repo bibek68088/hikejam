@@ -6,17 +6,16 @@ import { usePathname, useRouter } from "next/navigation";
 import Image from "next/image";
 import logo from "../../public/logo.jpg";
 import profile from "../../public/cat.png";
-import { logout, isLoggedIn, getUserRole } from "../../lib/auth";
+import { useAuth } from "../../components/auth-provider";
 
 const Navbar = () => {
   const [isMobile, setIsMobile] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
-  const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
-  const [userRole, setUserRole] = useState<string | null>(null);
   const [windowWidth, setWindowWidth] = useState(0);
   const pathname = usePathname();
   const router = useRouter();
   const dropdownRef = useRef(null);
+  const { isAuthenticated, isAdmin, logout } = useAuth();
 
   useEffect(() => {
     const handleResize = () => {
@@ -27,11 +26,6 @@ const Navbar = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  useEffect(() => {
-    setIsUserLoggedIn(isLoggedIn());
-    setUserRole(getUserRole());
-  }, []);
-
   const toggleMenu = () => setIsMobile(!isMobile);
   const toggleProfile = () => setIsProfileOpen(!isProfileOpen);
 
@@ -39,8 +33,6 @@ const Navbar = () => {
 
   const handleLogout = () => {
     logout();
-    setIsUserLoggedIn(false);
-    setUserRole(null);
     setIsProfileOpen(false);
     router.push("/");
   };
@@ -75,7 +67,6 @@ const Navbar = () => {
   const isActive = (path: string) => pathname === path;
   const isMobileView = windowWidth <= 768;
 
-  // Styles
   const navbarStyle = {
     display: "flex",
     justifyContent: "space-between",
@@ -264,14 +255,10 @@ const Navbar = () => {
           </div>
           {isProfileOpen && (
             <div style={profileDropdownStyle}>
-              {isUserLoggedIn ? (
+              {isAuthenticated ? (
                 <>
                   <Link
-                    href={
-                      userRole === "admin"
-                        ? "/admin/dashboard"
-                        : "/user/dashboard"
-                    }
+                    href={isAdmin ? "/admin/dashboard" : "/user/dashboard"}
                     style={dropdownItemStyle}
                     onMouseEnter={(e) => {
                       e.currentTarget.style.backgroundColor = "#f5f5f5";
