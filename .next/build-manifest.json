@@ -16,10 +16,10 @@
   ],
   "rootMainFilesTree": {},
   "pages": {
-    "/": [
+    "/Blog": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/index.js"
+      "static/chunks/pages/Blog.js"
     ],
     "/_app": [
       "static/chunks/webpack.js",
@@ -30,6 +30,7 @@
       "static/chunks/webpack.js",
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
+<<<<<<< HEAD
     ],
     "/admin/dashboard": [
       "static/chunks/webpack.js",
@@ -45,6 +46,8 @@
       "static/chunks/webpack.js",
       "static/chunks/main.js",
       "static/chunks/pages/destinations.js"
+=======
+>>>>>>> 231e7fd86309651ffb981a7dbde052aa62221bc5
     ]
   },
   "ampFirstPages": []
