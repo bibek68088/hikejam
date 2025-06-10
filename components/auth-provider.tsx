@@ -40,35 +40,42 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const isAuthenticated = !!user;
   const isAdmin = user?.role === "admin";
 
+  const updateAuthState = useCallback(() => {
+    if (typeof window !== "undefined") {
+      const loggedIn = isLoggedIn();
+      if (loggedIn) {
+        const userData = getUser();
+        setUser(userData);
+      } else {
+        setUser(null);
+      }
+      setLoading(false);
+    }
+  }, []);
+
   useEffect(() => {
-    const initAuth = () => {
-      if (typeof window !== "undefined") {
-        const loggedIn = isLoggedIn();
-        if (loggedIn) {
-          const userData = getUser();
-          setUser(userData);
-        }
-        setLoading(false);
+    updateAuthState(); // Initial check on mount
+
+    // Listen for storage changes (e.g., from other tabs or manual localStorage updates)
+    const handleStorageChange = (event: StorageEvent) => {
+      if (event.storageArea === localStorage && (event.key === "isLoggedIn" || event.key === "userData" || event.key === "userRole")) {
+        updateAuthState();
       }
     };
 
-    initAuth();
-  }, []);
+    window.addEventListener("storage", handleStorageChange);
+    return () => window.removeEventListener("storage", handleStorageChange);
+  }, [updateAuthState]);
 
   const login = useCallback((role: UserRole, userData?: Partial<User>) => {
-    const newUser: User = {
-      role,
-      ...userData,
-    };
-
     authSignin(role, userData);
-    setUser(newUser);
-  }, []);
+    updateAuthState(); // Update state immediately after login
+  }, [updateAuthState]);
 
   const logout = useCallback(() => {
     authLogout();
-    setUser(null);
-  }, []);
+    updateAuthState(); // Update state immediately after logout
+  }, [updateAuthState]);
 
   return (
     <AuthContext.Provider

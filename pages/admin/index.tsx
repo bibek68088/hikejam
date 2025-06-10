@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
-import AdminDashboard from "./AdminDashboard";
+import AdminDashboard from "./dashboard/AdminDashboard";
 import { useAuth } from "../../components/auth-provider";
 import LoadingSpinner from "../../components/loading-spinner";
 

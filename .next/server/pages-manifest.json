@@ -2,5 +2,12 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
+<<<<<<< HEAD
+  "/": "pages/index.js",
+  "/admin/dashboard": "pages/admin/dashboard.js",
+  "/destinations": "pages/destinations.js",
+  "/contact": "pages/contact.js"
+=======
   "/Blog": "pages/Blog.js"
+>>>>>>> 231e7fd86309651ffb981a7dbde052aa62221bc5
 }

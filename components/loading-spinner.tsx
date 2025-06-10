@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 export default function LoadingSpinner() {
   return (
@@ -8,5 +8,5 @@ export default function LoadingSpinner() {
         <p className="text-gray-600 font-medium">Loading...</p>
       </div>
     </div>
-  )
+  );
 }

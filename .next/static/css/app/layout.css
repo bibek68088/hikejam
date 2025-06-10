@@ -1775,6 +1775,8 @@
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
   }
+<<<<<<< HEAD
+=======
   .md\:order-1 {
     @media (width >= 48rem) {
       order: 1;
@@ -1785,6 +1787,7 @@
       order: 2;
     }
   }
+>>>>>>> 231e7fd86309651ffb981a7dbde052aa62221bc5
   .md\:flex {
     @media (width >= 48rem) {
       display: flex;
@@ -1795,11 +1798,14 @@
       width: calc(1/2 * 100%);
     }
   }
+<<<<<<< HEAD
+=======
   .md\:w-64 {
     @media (width >= 48rem) {
       width: calc(var(--spacing) * 64);
     }
   }
+>>>>>>> 231e7fd86309651ffb981a7dbde052aa62221bc5
   .md\:grid-cols-2 {
     @media (width >= 48rem) {
       grid-template-columns: repeat(2, minmax(0, 1fr));

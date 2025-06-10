@@ -1,4 +1,8 @@
+<<<<<<< HEAD
+// File: D:\SGDN Software\Extra\hikejam\app\layout.tsx
+=======
 // File: C:\hikejam\app\layout.tsx
+>>>>>>> 231e7fd86309651ffb981a7dbde052aa62221bc5
 import * as entry from '../../../app/layout.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 
